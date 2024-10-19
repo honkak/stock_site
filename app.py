@@ -300,7 +300,6 @@ import FinanceDataReader as fdr
 import datetime
 import pandas as pd
 
-#서비스 제목
 st.subheader('주식종목 차트비교 서비스')
 
 # 날짜 입력
@@ -317,11 +316,8 @@ code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 �
 # '시점고정비율' 체크박스
 fixed_ratio = st.checkbox("시점고정비율")
 
-# 표 표시 여부 체크박스
+# '표 표시' 체크박스
 show_table = st.checkbox("표 표시", value=True)
-
-# '종목코드 예시' 숨김 체크박스
-show_example = st.checkbox("종목코드 예시", value=True)
 
 # 입력된 종목 코드를 리스트로 생성
 codes = [code1, code2, code3]
@@ -352,44 +348,43 @@ data_matrix = [
 for i in range(17, 18):
     data_matrix.append(['-'] * 7)
 
-# '종목코드 예시' 출력 및 스타일링 (숨김 체크박스에 따라)
-if show_example:
+# '종목코드 예시'와 표 출력
+if show_table:
     st.subheader("종목코드 예시")
     
     # HTML로 표 생성
-    if show_table:
-        html = '''
-        <style>
-        table {
-            border-collapse: collapse; 
-            width: 100%; 
-            font-size: 10px;  /* 글자 크기를 10px로 설정 */
-        }
-        td {
-            border: 1px solid black; 
-            padding: 8px; 
-            text-align: center;
-        }
-        .highlight {
-            background-color: lightgray;
-        }
-        </style>
-        <table>
-        '''
-        
-        for i, row in enumerate(data_matrix):
-            html += '<tr>'
-            for j, cell in enumerate(row):
-                # 1행과 4열에 대해 옅은회색 배경 적용
-                if i == 0 or j == 3:
-                    html += f'<td class="highlight">{cell}</td>'
-                else:
-                    html += f'<td>{cell}</td>'
-            html += '</tr>'
-        html += '</table>'
+    html = '''
+    <style>
+    table {
+        border-collapse: collapse; 
+        width: 100%; 
+        font-size: 10px;  /* 글자 크기를 10px로 설정 */
+    }
+    td {
+        border: 1px solid black; 
+        padding: 8px; 
+        text-align: center;
+    }
+    .highlight {
+        background-color: lightgray;
+    }
+    </style>
+    <table>
+    '''
+    
+    for i, row in enumerate(data_matrix):
+        html += '<tr>'
+        for j, cell in enumerate(row):
+            # 1행과 4열에 대해 옅은회색 배경 적용
+            if i == 0 or j == 3:
+                html += f'<td class="highlight">{cell}</td>'
+            else:
+                html += f'<td>{cell}</td>'
+        html += '</tr>'
+    html += '</table>'
 
-        # HTML 출력
-        st.markdown(html, unsafe_allow_html=True)
+    # HTML 출력
+    st.markdown(html, unsafe_allow_html=True)
 
 if codes and date:
     dataframes = []
@@ -430,5 +425,6 @@ if codes and date:
             - Adj Close: 수정 종가
             - Volume: 거래량
             ''')
+
 
 
