@@ -65,13 +65,13 @@ for code in codes:
 col_name1, col_name2, col_name3 = st.columns(3)
 
 with col_name1:
-    st.write(f"{code1} ({stocks_info.get(code1.strip(), '이름을 찾을 수 없습니다.')})")
+    st.write(f"{code1} ({stocks_info.get(code1.strip(), '')})")
 
 with col_name2:
-    st.write(f"{code2} ({stocks_info.get(code2.strip(), '이름을 찾을 수 없습니다.')})")
+    st.write(f"{code2} ({stocks_info.get(code2.strip(), '')})")
 
 with col_name3:
-    st.write(f"{code3} ({stocks_info.get(code3.strip(), '이름을 찾을 수 없습니다.')})")
+    st.write(f"{code3} ({stocks_info.get(code3.strip(), '')})")
 
 # '시점고정비율' 체크박스
 fixed_ratio = st.checkbox("시점고정비율")
