@@ -300,10 +300,8 @@ import FinanceDataReader as fdr
 import datetime
 import pandas as pd
 
-st.title('종목 차트 검색')
-
-# 서브헤더 추가
-st.subheader('주식종목 차트비교 서비스')
+#서비스 제목 입력
+st.title('주식종목 차트비교 서비스')
 
 # 날짜 입력
 date = st.date_input(
