@@ -10,7 +10,7 @@ st.markdown(
     """
     <style>
     .css-1d391kg {
-        width: 450px;  /* 사이드바의 가로 길이를 450px로 설정 */
+        width: 500px;  /* 사이드바의 가로 길이를 500px로 설정 */
     }
     </style>
     """,
@@ -70,7 +70,7 @@ with st.sidebar:
     table {
         border-collapse: collapse; 
         width: 100%; 
-        font-size: 9px;  /* 글자 크기를 9px로 설정 */
+        font-size: 8px;  /* 글자 크기를 8px로 설정 */
     }
     td {
         border: 1px solid black; 
