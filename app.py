@@ -253,7 +253,11 @@ with st.container():
             border: 1px solid black; 
             padding: 4px;  /* 셀 패딩을 줄여서 열 너비를 줄임 */
             text-align: center;
-            width: 6%;  /* 열의 너비를 6%로 설정하여 고정 */
+            width: 6%;  /* 기본 열 너비 설정 (4열 제외) */
+        }
+        td:nth-child(4) {  /* 4열에 대한 스타일 */
+            width: auto;  /* 4열 너비를 자동으로 설정하여 글자 크기에 맞춤 */
+            white-space: nowrap;  /* 텍스트가 줄 바꿈되지 않도록 설정 */
         }
         .highlight {
             background-color: lightgray;
