@@ -402,7 +402,7 @@ if codes and start_date and end_date:  # 'date'를 'start_date'와 'end_date'로
             description_df = pd.DataFrame(column_description)
     
             # CSS를 사용하여 폰트 크기 조정
-            st.markdown("<style>div[data-testid='st.table'] table {font-size: 10px;}</style>", unsafe_allow_html=True)
+            st.markdown("<style>div[data-testid='st.table'] table {font-size: 5px;}</style>", unsafe_allow_html=True)
             st.table(description_df)
 
 
