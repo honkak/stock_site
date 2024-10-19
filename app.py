@@ -208,9 +208,9 @@ with st.container():
         ['', '', '', '농산물', 'DBA', '', ''],  # 17행
     ]
 
-    # 나머지 행을 '-'로 채우기
-    for i in range(17, 18):
-        data_matrix.append(['-'] * 7)
+    # # 나머지 행을 '-'로 채우기
+    # for i in range(17, 18):
+    #     data_matrix.append(['-'] * 7)
 
     # "종목코드 예시" 섹션 추가
     with st.expander("종목코드 예시", expanded=True):  # 기본적으로 펼쳐진 상태로 설정
