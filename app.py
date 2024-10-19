@@ -245,7 +245,8 @@ with st.container():
             overflow-x: auto;  /* 모바일에서 테이블이 넘치면 스크롤 생성을 허용 */
         }
         td {
-            border: 1px solid black;
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
             padding: 8px;
             text-align: center;
             word-wrap: break-word;  /* 긴 텍스트는 줄바꿈 */
@@ -261,6 +262,7 @@ with st.container():
         </style>
         <table>
         '''
+
 
 
         for i, row in enumerate(data_matrix):
