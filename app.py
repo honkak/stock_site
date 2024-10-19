@@ -10,7 +10,7 @@ st.markdown(
     """
     <style>
     .css-1d391kg {
-        width: 500px;  /* 사이드바의 가로 길이를 500px로 설정 */
+        width: 400px;  /* 사이드바의 가로 길이를 400px로 설정 */
     }
     </style>
     """,
@@ -56,7 +56,7 @@ data_matrix = [
     ['', '', '', '농산물', 'DBA', '', ''],  # 17행
 ]
 
-# 나머지 행을 'aaa'로 채우기
+# 나머지 행을 '-'로 채우기
 for i in range(17, 18):
     data_matrix.append(['-'] * 7)
 
@@ -70,7 +70,7 @@ with st.sidebar:
     table {
         border-collapse: collapse; 
         width: 100%; 
-        font-size: 8px;  /* 글자 크기를 8px로 설정 */
+        font-size: 10px;  /* 글자 크기를 10px로 설정 */
     }
     td {
         border: 1px solid black; 
