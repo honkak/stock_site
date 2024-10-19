@@ -247,12 +247,13 @@ with st.container():
         table {
             border-collapse: collapse; 
             width: 100%; 
-            font-size: 7px;  /* 글자 크기를 10px로 설정 */
+            font-size: 8px;  /* 글자 크기를 10px로 설정 */
         }
         td {
             border: 1px solid black; 
             padding: 8px; 
             text-align: center;
+            width: 10%;  /* 열의 너비를 10%로 설정하여 고정 */
         }
         .highlight {
             background-color: lightgray;
