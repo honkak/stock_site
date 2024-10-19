@@ -189,7 +189,7 @@
 #     codes = [code1, code2, code3]
 #     codes = [code.strip() for code in codes if code]  # 빈 코드 제거
 
-#     # 24행 * 7열의 표 내용 생성
+#     # 17행 * 7열의 표 내용 생성
 #     data_matrix = [
 #         ['-3X', '-2X', '-1X', '코드', '1X', '2X', '3X'],  # 1행
 #         ['SPXU', 'SDS', 'SH', 'S&P500', 'SPY', 'SSO', 'UPRO'],  # 2행
@@ -369,12 +369,25 @@ data_matrix_index = [
     ['KS200', '코스피200', '-', '-', 'DAX', '독일DAX30'],  # 7행
 ]
 
-# '종목코드 예시'와 표 출력
+# 시가총액 상위 11개 종목 데이터 행렬
+data_matrix_top_stocks = [
+    ['미국종목코드', '설명', '한국종목코드', '설명'],  # 1행
+    ['AAPL', '애플', '005930', '삼성전자'],  # 2행
+    ['MSFT', '마이크로소프트', '000660', 'SK하이닉스'],  # 3행
+    ['AMZN', '아마존', '373220', 'LG에너지솔루션'],  # 4행
+    ['NVDA', '엔비디아', '207940', '삼성바이오로직스'],  # 5행
+    ['GOOGL', '알파벳A', '005380', '현대차'],  # 6행
+    ['META', '메타', '068270', '셀트리온'],  # 7행
+    ['TSLA', '테슬라', '000270', '기아'],  # 8행
+    ['BRK.B', '버크셔헤서웨이', '196170', '알테오젠'],  # 9행
+    ['UNH', '유나이티드헬스', '247540', '에코프로비엠'],  # 10행
+    ['JNJ', '존슨앤존슨', '086520', '에코프로'],  # 11행
+]
+
+# '주요종목' 체크박스를 선택할 때 표 출력
 if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
-    # st.subheader("종목코드 예시")
-    
+    # 미국ETF 표 출력
     if show_us_etf:
-        # 미국ETF 표 출력
         html = '''
         <style>
         table {
@@ -403,12 +416,10 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
                     html += f'<td>{cell}</td>'
             html += '</tr>'
         html += '</table>'
-
-        # HTML 출력
         st.markdown(html, unsafe_allow_html=True)
-    
+
+    # 지수 표 출력
     if show_major_index:
-        # 지수 표 출력
         html_index = '''
         <style>
         table {
@@ -437,9 +448,39 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
                     html_index += f'<td>{cell}</td>'
             html_index += '</tr>'
         html_index += '</table>'
-
-        # HTML 출력
         st.markdown(html_index, unsafe_allow_html=True)
+
+    # 주요종목 표 출력
+    if show_major_stocks:
+        html_top_stocks = '''
+        <style>
+        table {
+            border-collapse: collapse; 
+            width: 100%; 
+            font-size: 10px;  /* 글자 크기를 10px로 설정 */
+        }
+        td {
+            border: 1px solid black; 
+            padding: 8px; 
+            text-align: center;
+        }
+        .highlight {
+            background-color: lightgray;
+        }
+        </style>
+        <table>
+        '''
+        
+        for i, row in enumerate(data_matrix_top_stocks):
+            html_top_stocks += '<tr>'
+            for j, cell in enumerate(row):
+                if i == 0 or j == 1 or j == 3:
+                    html_top_stocks += f'<td class="highlight">{cell}</td>'
+                else:
+                    html_top_stocks += f'<td>{cell}</td>'
+            html_top_stocks += '</tr>'
+        html_top_stocks += '</table>'
+        st.markdown(html_top_stocks, unsafe_allow_html=True)
 
 if codes and date:
     dataframes = []
@@ -478,6 +519,7 @@ if codes and date:
             - Adj Close: 수정 종가
             - Volume: 거래량
             ''')
+
 
 
 
