@@ -11,21 +11,6 @@ import yfinance as yf
 #서비스 제목 입력
 st.title('주식종목 차트비교 서비스')
 
-# # 날짜 입력 (조회 시작일과 종료일을 같은 행에 배치)
-# col_start_date, col_end_date = st.columns(2)
-
-# with col_start_date:
-#     start_date = st.date_input(
-#         "조회 시작일을 선택해 주세요",
-#         datetime.datetime(2024, 1, 1)
-#     )
-
-# with col_end_date:
-#     end_date = st.date_input(
-#         "조회 종료일을 선택해 주세요",
-#         datetime.datetime.now()
-#     )
-
 # 날짜 입력 (조회 시작일과 종료일을 같은 행에 배치)
 col_start_date, col_end_date = st.columns(2)
 
@@ -43,7 +28,7 @@ with col_end_date:
 
 # 시작 날짜와 종료 날짜 비교
 if start_date > end_date:
-    st.warning("시작일이 종료일보다 더 늦습니다. 날짜를 자동으로 바꿉니다.")
+    st.warning("시작일이 종료일보다 더 늦습니다. 날짜를 자동으로 맞바꿔 반영합니다.")
     start_date, end_date = end_date, start_date  # 날짜를 바꿈
 
 # 변경된 날짜 표시
