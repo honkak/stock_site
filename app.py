@@ -391,17 +391,6 @@ if codes and start_date and end_date:  # 'date'를 'start_date'와 'end_date'로
             if fixed_ratio:
                 st.write("Y축은 비율로 표시되며, 0%에서 시작합니다.")
     
-        # with tab2:
-        #     st.dataframe(pd.concat([fdr.DataReader(code, start_date, end_date) for code in codes], keys=codes))
-            
-        #     # 컬럼 설명을 표 형식으로 표시
-        #     column_description = {
-        #         '컬럼명': ['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume'],
-        #         '설명': ['시가', '고가', '저가', '종가', '수정 종가', '거래량']
-        #     }
-        #     description_df = pd.DataFrame(column_description)
-        #     st.table(description_df)
-
         with tab2:
             st.dataframe(pd.concat([fdr.DataReader(code, start_date, end_date) for code in codes], keys=codes))
             
@@ -411,20 +400,5 @@ if codes and start_date and end_date:  # 'date'를 'start_date'와 'end_date'로
                 '설명': ['시가', '고가', '저가', '종가', '수정 종가', '거래량']
             }
             description_df = pd.DataFrame(column_description)
-    
-            # CSS를 사용하여 폰트 크기 조정 및 중앙 정렬
-            st.markdown("""
-                <style>
-                    div[data-testid='st.table'] table {
-                        font-size: 12px;
-                        margin: auto; /* 테이블 중앙 정렬 */
-                    }
-                    div[data-testid='st.table'] th, 
-                    div[data-testid='st.table'] td {
-                        text-align: center; /* 셀 내용 중앙 정렬 */
-                    }
-                </style>
-            """, unsafe_allow_html=True)
-            
             st.table(description_df)
 
