@@ -311,7 +311,7 @@ if codes and start_date and end_date:  # 'date'를 'start_date'와 'end_date'로
 
     # 데이터프레임 리스트가 있을 경우
     if dataframes:
-        combined_data = pd.concat(dataframes, axis=1)
+        combined_df = pd.concat(dataframes, axis=1)
 
         # 차트 그리기
         plt.figure(figsize=(10, 5))
@@ -326,7 +326,7 @@ if codes and start_date and end_date:  # 'date'를 'start_date'와 'end_date'로
         
         tab1, tab2 = st.tabs(['차트', '데이터'])    
         with tab1:
-            st.line_chart(combined_data, use_container_width=True)
+            st.line_chart(combined_df, use_container_width=True)
             if fixed_ratio:
                 st.write("Y축은 비율로 표시되며, 0%에서 시작합니다.")
     
