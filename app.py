@@ -7,6 +7,7 @@ import FinanceDataReader as fdr
 import datetime
 import pandas as pd
 import yfinance as yf
+import matplotlib.pyplot as plt
 
 #서비스 제목 입력
 st.title('주식종목 차트비교 서비스')
