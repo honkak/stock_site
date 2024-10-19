@@ -311,12 +311,12 @@ if codes and start_date and end_date:  # 'date'를 'start_date'와 'end_date'로
 
     # 데이터프레임 리스트가 있을 경우
     if dataframes:
-        combined_df = pd.concat(dataframes, axis=1)
+        combined_data = pd.concat(dataframes, axis=1)
 
         # 차트 그리기
         plt.figure(figsize=(10, 5))
-        for i, col in enumerate(combined_df.columns):
-            plt.plot(combined_df.index, combined_df[col], label=names[i])  # 종목명으로 범례 설정
+        for i, col in enumerate(combined_data.columns):  # 수정: combined_df → combined_data
+            plt.plot(combined_data.index, combined_data[col], label=names[i])
 
         plt.title('종목 차트')
         plt.xlabel('날짜')
@@ -326,12 +326,12 @@ if codes and start_date and end_date:  # 'date'를 'start_date'와 'end_date'로
         
         tab1, tab2 = st.tabs(['차트', '데이터'])    
         with tab1:
-            st.line_chart(combined_df, use_container_width=True)
+            st.line_chart(combined_data, use_container_width=True)
             if fixed_ratio:
                 st.write("Y축은 비율로 표시되며, 0%에서 시작합니다.")
     
         with tab2:
-            st.dataframe(pd.concat([fdr.DataReader(code, start_date, end_date) for code in codes], keys=codes))
+            st.dataframe(combined_data)  # 수정: pd.concat을 통해 이미 가져온 데이터 사용
             
             # 컬럼 설명을 표 형식으로 표시
             column_description = {
