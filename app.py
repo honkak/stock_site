@@ -256,7 +256,7 @@ with st.container():
             width: 6%;  /* 기본 열 너비 설정 (4열 제외) */
         }
         td:nth-child(4) {  /* 4열에 대한 스타일 */
-            width: auto;  /* 4열 너비를 자동으로 설정하여 글자 크기에 맞춤 */
+            width: 3%;  /* 4열의 너비를 더 좁게 설정 */
             white-space: nowrap;  /* 텍스트가 줄 바꿈되지 않도록 설정 */
         }
         .highlight {
