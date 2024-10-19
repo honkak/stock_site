@@ -235,32 +235,32 @@ with st.container():
     #     '''
     
     with st.expander("종목코드 예시", expanded=True):
-    html = '''
-    <style>
-    table {
-        border-collapse: collapse;
-        width: 100%;
-        font-size: 10px;
-        max-width: 100%;  /* 모바일 화면 크기에 맞춰 테이블 너비를 제한 */
-        overflow-x: auto;  /* 모바일에서 테이블이 넘치면 스크롤 생성을 허용 */
-    }
-    td {
-        border: 1px solid black;
-        padding: 8px;
-        text-align: center;
-        word-wrap: break-word;  /* 긴 텍스트는 줄바꿈 */
-    }
-    .highlight {
-        background-color: lightgray;
-    }
-    @media screen and (max-width: 600px) {
+        html = '''
+        <style>
         table {
-            font-size: 8px;  /* 모바일에서는 글자 크기를 더 작게 조정 */
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 10px;
+            max-width: 100%;  /* 모바일 화면 크기에 맞춰 테이블 너비를 제한 */
+            overflow-x: auto;  /* 모바일에서 테이블이 넘치면 스크롤 생성을 허용 */
         }
-    }
-    </style>
-    <table>
-    '''
+        td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+            word-wrap: break-word;  /* 긴 텍스트는 줄바꿈 */
+        }
+        .highlight {
+            background-color: lightgray;
+        }
+        @media screen and (max-width: 600px) {
+            table {
+                font-size: 8px;  /* 모바일에서는 글자 크기를 더 작게 조정 */
+            }
+        }
+        </style>
+        <table>
+        '''
 
         for i, row in enumerate(data_matrix):
             html += '<tr>'
