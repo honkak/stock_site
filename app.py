@@ -300,6 +300,9 @@ import FinanceDataReader as fdr
 import datetime
 import pandas as pd
 
+st.title('종목 차트 검색')
+
+# 서브헤더 추가
 st.subheader('주식종목 차트비교 서비스')
 
 # 날짜 입력
@@ -316,8 +319,11 @@ code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 �
 # '시점고정비율' 체크박스
 fixed_ratio = st.checkbox("시점고정비율")
 
-# '표 표시' 체크박스
-show_table = st.checkbox("표 표시", value=True)
+# 수평선 추가
+st.markdown("---")
+
+# '미국ETF' 체크박스
+show_table = st.checkbox("미국ETF", value=True)
 
 # 입력된 종목 코드를 리스트로 생성
 codes = [code1, code2, code3]
@@ -425,6 +431,7 @@ if codes and date:
             - Adj Close: 수정 종가
             - Volume: 거래량
             ''')
+
 
 
 
