@@ -467,38 +467,6 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
             html_kr_etf += '</tr>'
         html_kr_etf += '</table>'
         st.markdown(html_kr_etf, unsafe_allow_html=True)
-
-    # 지수 표 출력
-    if show_major_index:
-        html_index = '''
-        <style>
-        table {
-            border-collapse: collapse; 
-            width: 100%; 
-            font-size: 10px;  /* 글자 크기를 10px로 설정 */
-        }
-        td {
-            border: 1px solid black; 
-            padding: 8px; 
-            text-align: center;
-        }
-        .highlight {
-            background-color: lightgray;
-        }
-        </style>
-        <table>
-        '''
-        
-        for i, row in enumerate(data_matrix_index):
-            html_index += '<tr>'
-            for j, cell in enumerate(row):
-                if i == 0 or j == 1 or j == 3 or j == 5:  # 첫 번째 행과 코드 열 강조
-                    html_index += f'<td class="highlight">{cell}</td>'
-                else:
-                    html_index += f'<td>{cell}</td>'
-            html_index += '</tr>'
-        html_index += '</table>'
-        st.markdown(html_index, unsafe_allow_html=True)
     
     # 주요종목 표 출력
     if show_major_stocks:
@@ -531,7 +499,39 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
             html_major_stocks += '</tr>'
         html_major_stocks += '</table>'
         st.markdown(html_major_stocks, unsafe_allow_html=True)
+
+    # 지수 표 출력
+    if show_major_index:
+        html_index = '''
+        <style>
+        table {
+            border-collapse: collapse; 
+            width: 100%; 
+            font-size: 10px;  /* 글자 크기를 10px로 설정 */
+        }
+        td {
+            border: 1px solid black; 
+            padding: 8px; 
+            text-align: center;
+        }
+        .highlight {
+            background-color: lightgray;
+        }
+        </style>
+        <table>
+        '''
         
+        for i, row in enumerate(data_matrix_index):
+            html_index += '<tr>'
+            for j, cell in enumerate(row):
+                if i == 0 or j == 1 or j == 3 or j == 5:  # 첫 번째 행과 코드 열 강조
+                    html_index += f'<td class="highlight">{cell}</td>'
+                else:
+                    html_index += f'<td>{cell}</td>'
+            html_index += '</tr>'
+        html_index += '</table>'
+        st.markdown(html_index, unsafe_allow_html=True)
+
 if codes and date:
     dataframes = []
     
