@@ -398,6 +398,37 @@ if codes and date:
         try:
             df = fdr.DataReader(code, date)
             close_prices = df['Close']
-  
+            if fixed_ratio:
+                start_price = close_prices.iloc[0]
+                data = ((close_prices - start_price) / start_price) * 100
+                dataframes.append(data.rename(code))
+            else:
+                dataframes.append(close_prices.rename(code))
+        except Exception as e:
+            st.error(f"{code}의 데이터를 불러오는 데 오류가 발생했습니다: {e}")
+
+    if dataframes:
+        combined_data = pd.concat(dataframes, axis=1)
+        tab1, tab2 = st.tabs(['차트', '데이터'])
+
+        with tab1:
+            if fixed_ratio:
+                st.line_chart(combined_data, use_container_width=True)  # 가로 크기를 컨테이너에 맞춤
+                st.write("Y축은 비율로 표시되며, 0%에서 시작합니다.")
+            else:
+                st.line_chart(combined_data, use_container_width=True)  # 가로 크기를 컨테이너에 맞춤
+
+        with tab2:
+            st.dataframe(pd.concat([fdr.DataReader(code, date) for code in codes], keys=codes))
+
+        with st.expander('컬럼 설명'):
+            st.markdown('''\
+            - Open: 시가
+            - High: 고가
+            - Low: 저가
+            - Close: 종가
+            - Adj Close: 수정 종가
+            - Volume: 거래량
+            ''')
 
 
