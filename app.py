@@ -400,8 +400,10 @@ if codes and start_date and end_date:  # 'date'를 'start_date'와 'end_date'로
                 '설명': ['시가', '고가', '저가', '종가', '수정 종가', '거래량']
             }
             description_df = pd.DataFrame(column_description)
-            st.table(description_df)
     
+            # CSS를 사용하여 폰트 크기 조정
+            st.markdown("<style>div[data-testid='st.table'] table {font-size: 12px;}</style>", unsafe_allow_html=True)
+            st.table(description_df)
 
 
 
