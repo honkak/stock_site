@@ -78,7 +78,7 @@ with st.sidebar:
         text-align: center;
     }
     .highlight {
-        background-color: black;
+        background-color: gray;
     }
     </style>
     <table>
@@ -87,7 +87,7 @@ with st.sidebar:
     for i, row in enumerate(data_matrix):
         html += '<tr>'
         for j, cell in enumerate(row):
-            # 1행과 4열에 대해 검정색 배경 적용
+            # 1행과 4열에 대해 회색 배경 적용
             if i == 0 or j == 3:
                 html += f'<td class="highlight">{cell}</td>'
             else:
