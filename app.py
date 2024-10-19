@@ -242,29 +242,44 @@ with st.container():
             width: 100%;
             font-size: 10px;
             table-layout: fixed;  /* 열 너비를 고정하여 비율로 나누기 */
-            overflow-x: auto;  /* 모바일에서 테이블 넘칠 시 스크롤 */
+            overflow-x: auto;  /* 테이블 넘칠 시 가로 스크롤 허용 */
         }
         td {
             border: 1px solid black;
             padding: 8px;
             text-align: center;
-            # word-wrap: break-word;  /* 긴 텍스트 줄바꿈 */
-            width: 10%;  /* 열의 너비를 10%로 설정하여 고정 */
+            white-space: nowrap;  /* 줄바꿈 방지 */
+            overflow: hidden;  /* 넘치는 텍스트를 숨김 */
+            font-size: 10px;  /* 기본 글자 크기 */
         }
-        .highlight {
-            background-color: lightgray;
+        .shrink-text {
+            display: inline-block;
+            max-width: 100%;  /* 셀 안에서 글자가 넘치지 않도록 최대 너비 설정 */
+            font-size: 10px;  /* 기본 크기 */
+            transform: scale(1);  /* 기본 크기 유지 */
+            transition: transform 0.2s ease-in-out;  /* 부드럽게 크기 조정 */
+        }
+        td:has(.shrink-text) {
+            text-align: center;
         }
         @media screen and (max-width: 600px) {
-            table {
-                font-size: 8px;  /* 모바일에서는 글자 크기를 더 작게 */
+            td .shrink-text {
+                font-size: 8px;  /* 모바일에서는 기본 글자 크기를 더 작게 */
+                transform: scale(0.8);  /* 글자 크기 자동 줄이기 */
             }
             td {
-                padding: 4px;  /* 모바일에서 패딩을 줄여 공간 절약 */
+                padding: 4px;  /* 모바일에서 패딩 줄이기 */
             }
         }
         </style>
         <table>
+            <tr>
+                <td><span class="shrink-text">종목코드 예시1</span></td>
+                <td><span class="shrink-text">종목코드 예시2</span></td>
+            </tr>
+        </table>
         '''
+
 
         for i, row in enumerate(data_matrix):
             html += '<tr>'
