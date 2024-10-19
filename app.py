@@ -10,18 +10,20 @@ import pandas as pd
 #서비스 제목 입력
 st.title('주식종목 차트비교 서비스')
 
-# 날짜 입력
-start_date = st.date_input(
-    "조회 시작일 선택",
-    datetime.datetime(2024, 1, 1)
-)
+# 날짜 입력 (조회 시작일과 종료일을 같은 행에 배치)
+col_start_date, col_end_date = st.columns(2)
 
-# 종료일을 가장 최근 종가 일자로 기본값 설정
-# 여기서는 기본적으로 오늘 날짜로 설정하였습니다.
-end_date = st.date_input(
-    "조회 종료일 선택",
-    datetime.date.today()  # 오늘 날짜를 기본값으로 설정
-)
+with col_start_date:
+    start_date = st.date_input(
+        "조회 시작일을 선택해 주세요",
+        datetime.datetime(2024, 1, 1)
+    )
+
+with col_end_date:
+    end_date = st.date_input(
+        "조회 종료일을 선택해 주세요",
+        datetime.datetime.now()
+    )
 
 # 세 개의 종목 코드 입력 필드
 code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 입력해 주세요')
