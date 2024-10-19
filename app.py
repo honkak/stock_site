@@ -244,7 +244,7 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
         html_index += '</table>'
         st.markdown(html_index, unsafe_allow_html=True)
 
-if codes and date:
+if codes and start_date:  # date 대신 start_date 사용
     dataframes = []
     
     for code in codes:
