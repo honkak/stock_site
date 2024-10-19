@@ -246,14 +246,14 @@ with st.container():
         }
         table {
             border-collapse: collapse; 
-            width: 100%; 
-            font-size: 8px;  /* 글자 크기를 10px로 설정 */
+            width: auto;  /* 전체 너비를 자동으로 설정 */
+            font-size: 8px;  /* 글자 크기를 8px로 설정 */
         }
         td {
             border: 1px solid black; 
-            padding: 8px; 
+            padding: 4px;  /* 셀 패딩을 줄여서 열 너비를 줄임 */
             text-align: center;
-            width: 8%;  /* 열의 너비를 10%로 설정하여 고정 */
+            width: 6%;  /* 열의 너비를 6%로 설정하여 고정 */
         }
         .highlight {
             background-color: lightgray;
