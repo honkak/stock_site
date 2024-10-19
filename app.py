@@ -54,10 +54,41 @@ for code in codes:
         except Exception as e:
             stocks_info[code] = '이름을 찾을 수 없습니다.'
 
-# 종목 코드와 이름 표시
-st.write(f"종목코드 1: {code1} ({stocks_info.get(code1.strip(), '이름을 찾을 수 없습니다.')})")
-st.write(f"종목코드 2: {code2} ({stocks_info.get(code2.strip(), '이름을 찾을 수 없습니다.')})")
-st.write(f"종목코드 3: {code3} ({stocks_info.get(code3.strip(), '이름을 찾을 수 없습니다.')})")
+# # 종목 코드와 이름 표시
+# st.write(f"종목코드 1: {code1} ({stocks_info.get(code1.strip(), '이름을 찾을 수 없습니다.')})")
+# st.write(f"종목코드 2: {code2} ({stocks_info.get(code2.strip(), '이름을 찾을 수 없습니다.')})")
+# st.write(f"종목코드 3: {code3} ({stocks_info.get(code3.strip(), '이름을 찾을 수 없습니다.')})")
+
+# 종목코드를 입력받는 열과 이름을 표시하는 열을 나란히 배치
+col1, col2 = st.columns(2)
+
+with col1:
+    종목코드1 = st.text_input('종목코드1')
+    종목코드2 = st.text_input('종목코드2')
+    종목코드3 = st.text_input('종목코드3')
+
+# 종목코드에 따른 이름을 오른쪽 열에 표시
+with col2:
+    if 종목코드1:
+        try:
+            name1 = fdr.StockListing('KRX')[fdr.StockListing('KRX')['Symbol'] == 종목코드1]['Name'].values[0]
+            st.write(f"종목 이름: {name1}")
+        except:
+            st.write("유효하지 않은 코드입니다.")
+    
+    if 종목코드2:
+        try:
+            name2 = fdr.StockListing('KRX')[fdr.StockListing('KRX')['Symbol'] == 종목코드2]['Name'].values[0]
+            st.write(f"종목 이름: {name2}")
+        except:
+            st.write("유효하지 않은 코드입니다.")
+    
+    if 종목코드3:
+        try:
+            name3 = fdr.StockListing('KRX')[fdr.StockListing('KRX')['Symbol'] == 종목코드3]['Name'].values[0]
+            st.write(f"종목 이름: {name3}")
+        except:
+            st.write("유효하지 않은 코드입니다.")
 
 # '시점고정비율' 체크박스
 fixed_ratio = st.checkbox("시점고정비율")
