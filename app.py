@@ -246,12 +246,13 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
         html_index += '</table>'
         st.markdown(html_index, unsafe_allow_html=True)
 
-if codes and start_date:  # date 대신 start_date 사용
+# 데이터 로딩 부분에서 오류 처리
+if codes and start_date and end_date:  # 'date'를 'start_date'와 'end_date'로 수정
     dataframes = []
-    
+
     for code in codes:
         try:
-            df = fdr.DataReader(code, start_date, end_date)  # 여기서 start_date와 end_date 사용
+            df = fdr.DataReader(code, start_date, end_date)  # 'date'를 'start_date', 'end_date'로 수정
             close_prices = df['Close']
             if fixed_ratio:
                 start_price = close_prices.iloc[0]
@@ -259,20 +260,20 @@ if codes and start_date:  # date 대신 start_date 사용
                 dataframes.append(data.rename(code))
             else:
                 dataframes.append(close_prices.rename(code))
-        except Exception as e:
-            st.error(f"{code}의 데이터를 불러오는 데 오류가 발생했습니다: {e}")
+        except Exception:  # Exception을 처리하되, 오류 메시지를 표시하지 않음
+            st.warning(f"{code}의 데이터를 불러오는 데 문제가 발생했습니다. 확인해 주세요.")
 
     if dataframes:
         combined_data = pd.concat(dataframes, axis=1)
         tab1, tab2 = st.tabs(['차트', '데이터'])
 
         with tab1:
-            st.line_chart(combined_data, use_container_width=True)  # 가로 크기를 컨테이너에 맞춤
+            st.line_chart(combined_data, use_container_width=True)
             if fixed_ratio:
                 st.write("Y축은 비율로 표시되며, 0%에서 시작합니다.")
 
         with tab2:
-            st.dataframe(pd.concat([fdr.DataReader(code, date) for code in codes], keys=codes))
+            st.dataframe(pd.concat([fdr.DataReader(code, start_date, end_date) for code in codes], keys=codes))
 
         with st.expander('컬럼 설명'):
             st.markdown('''\
