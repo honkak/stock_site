@@ -51,6 +51,26 @@ with col4:
 codes = [code1, code2, code3]
 codes = [code.strip() for code in codes if code]  # 빈 코드 제거
 
+# 종목 코드에 대한 이름 가져오기 함수
+def get_stock_names(codes):
+    names = {}
+    for code in codes:
+        try:
+            df = fdr.DataReader(code, date)
+            names[code] = df['Name'].iloc[0]  # 첫 번째 행에서 이름 가져오기
+        except:
+            names[code] = "이름을 가져오는 데 실패했습니다."
+    return names
+
+# 종목 이름 가져오기
+stock_names = get_stock_names(codes)
+
+# 표 출력
+if codes:
+    for code in codes:
+        if code in stock_names:
+            st.write(f"{code}: {stock_names[code]}")
+
 # '미국ETF' 체크박스와 연결된 데이터 행렬
 data_matrix_us_etf = [
     ['-3X', '-2X', '-1X', '코드', '1X', '2X', '3X'],  # 1행
