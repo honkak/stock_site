@@ -248,36 +248,25 @@ with st.container():
             border: 1px solid black;
             padding: 8px;
             text-align: center;
-            white-space: nowrap;  /* 줄바꿈 방지 */
-            overflow: hidden;  /* 넘치는 텍스트를 숨김 */
+            white-space: nowrap;  /* 줄바꿈을 방지 */
+            overflow: hidden;  /* 넘친 텍스트를 숨김 */
+            text-overflow: ellipsis;  /* 넘친 텍스트 뒤에 '...' 표시 */
             font-size: 10px;  /* 기본 글자 크기 */
         }
-        .shrink-text {
-            display: inline-block;
-            max-width: 100%;  /* 셀 안에서 글자가 넘치지 않도록 최대 너비 설정 */
-            font-size: 10px;  /* 기본 크기 */
-            transform: scale(1);  /* 기본 크기 유지 */
-            transition: transform 0.2s ease-in-out;  /* 부드럽게 크기 조정 */
-        }
-        td:has(.shrink-text) {
-            text-align: center;
+        .highlight {
+            background-color: lightgray;
         }
         @media screen and (max-width: 600px) {
-            td .shrink-text {
-                font-size: 8px;  /* 모바일에서는 기본 글자 크기를 더 작게 */
-                transform: scale(0.8);  /* 글자 크기 자동 줄이기 */
+            table {
+                font-size: 8px;  /* 모바일에서는 글자 크기를 더 작게 조정 */
             }
             td {
-                padding: 4px;  /* 모바일에서 패딩 줄이기 */
+                padding: 4px;
+                font-size: 8px;  /* 작은 화면에서 글자 크기 축소 */
             }
         }
         </style>
         <table>
-            <tr>
-                <td><span class="shrink-text">종목코드 예시1</span></td>
-                <td><span class="shrink-text">종목코드 예시2</span></td>
-            </tr>
-        </table>
         '''
 
 
