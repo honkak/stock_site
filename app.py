@@ -59,33 +59,6 @@ st.write(f"종목코드 1: {code1} ({stocks_info.get(code1.strip(), '이름을 �
 st.write(f"종목코드 2: {code2} ({stocks_info.get(code2.strip(), '이름을 찾을 수 없습니다.')})")
 st.write(f"종목코드 3: {code3} ({stocks_info.get(code3.strip(), '이름을 찾을 수 없습니다.')})")
 
-
-# 종목 코드 리스트
-codes = [code1.strip(), code2.strip(), code3.strip()]
-
-# 종목 정보 가져오기
-stocks_info = {}
-for code in codes:
-    if code:
-        try:
-            # 한국 종목 코드에 .KS 추가, 미국 종목은 그대로 사용, 지수는 그대로 사용
-            if code.isdigit():
-                stock = yf.Ticker(f"{code}.KS")
-            elif:
-                stock = yf.Ticker(code)
-            else:
-                stock = yf.Ticker(f"^{code}")
-            stocks_info[code] = stock.info.get('shortName', '이름을 찾을 수 없습니다.')
-        except Exception as e:
-            stocks_info[code] = '이름을 찾을 수 없습니다.'
-
-# 종목 코드와 이름 표시
-st.write(f"종목코드 1: {code1} ({stocks_info.get(code1.strip(), '이름을 찾을 수 없습니다.')})")
-st.write(f"종목코드 2: {code2} ({stocks_info.get(code2.strip(), '이름을 찾을 수 없습니다.')})")
-st.write(f"종목코드 3: {code3} ({stocks_info.get(code3.strip(), '이름을 찾을 수 없습니다.')})")
-
-
-
 # '시점고정비율' 체크박스
 fixed_ratio = st.checkbox("시점고정비율")
 
