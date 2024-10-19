@@ -26,10 +26,10 @@ with col_end_date:
         datetime.datetime.now()
     )
 
-# # 세 개의 종목 코드 입력 필드
-# code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 입력해 주세요')
-# code2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력해 주세요')
-# code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력해 주세요')
+# 세 개의 종목 코드 입력 필드
+code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 입력해 주세요')
+code2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력해 주세요')
+code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력해 주세요')
 
 # 종목 코드 리스트
 codes = [code1.strip(), code2.strip(), code3.strip()]
