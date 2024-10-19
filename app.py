@@ -428,7 +428,7 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
         for i, row in enumerate(data_matrix_us_etf):
             html += '<tr>'
             for j, cell in enumerate(row):
-                if i == 0 or j % 2 == 0:  # 첫 번째 행과 코드 열 강조
+                if i == 0 or j == 3:  # 첫 번째 행과 코드 열 강조
                     html += f'<td class="highlight">{cell}</td>'
                 else:
                     html += f'<td>{cell}</td>'
@@ -460,7 +460,7 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
         for i, row in enumerate(data_matrix_top_stocks):
             html_major_stocks += '<tr>'
             for j, cell in enumerate(row):
-                if i == 0 or j % 2 == 0:  # 첫 번째 행과 코드 열 강조
+                if i == 0 or j == 1 or j == 3:  # 첫 번째 행과 코드 열 강조
                     html_major_stocks += f'<td class="highlight">{cell}</td>'
                 else:
                     html_major_stocks += f'<td>{cell}</td>'
@@ -492,7 +492,7 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
         for i, row in enumerate(data_matrix_index):
             html_index += '<tr>'
             for j, cell in enumerate(row):
-                if i == 0 or j % 2 == 0:  # 첫 번째 행과 코드 열 강조
+                if i == 0 or j == 1 or j == 3 or j == 5:  # 첫 번째 행과 코드 열 강조
                     html_index += f'<td class="highlight">{cell}</td>'
                 else:
                     html_index += f'<td>{cell}</td>'
@@ -524,7 +524,7 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
         for i, row in enumerate(data_matrix_kr_etf):
             html_kr_etf += '<tr>'
             for j, cell in enumerate(row):
-                if i == 0 or j % 2 == 0:  # 첫 번째 행과 코드 열 강조
+                if i == 0 or j == 1 or j == 3:  # 첫 번째 행과 코드 열 강조
                     html_kr_etf += f'<td class="highlight">{cell}</td>'
                 else:
                     html_kr_etf += f'<td>{cell}</td>'
