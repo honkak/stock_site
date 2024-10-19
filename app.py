@@ -248,7 +248,7 @@ with st.container():
             border: 1px solid black;
             padding: 8px;
             text-align: center;
-            word-wrap: break-word;  /* 긴 텍스트 줄바꿈 */
+            # word-wrap: break-word;  /* 긴 텍스트 줄바꿈 */
             width: 10%;  /* 열의 너비를 10%로 설정하여 고정 */
         }
         .highlight {
