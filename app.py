@@ -1,3 +1,4 @@
+# 사이드바 있는 버전
 # import streamlit as st
 # import FinanceDataReader as fdr
 # import datetime
@@ -138,12 +139,13 @@
 #             - Volume: 거래량
 #             ''')
 
+#사이드바 없는 버전
 import streamlit as st
 import FinanceDataReader as fdr
 import datetime
 import pandas as pd
 
-st.title('종목 차트 검색')
+st.subheader('주식종목 차트비교 서비스')
 
 # 사이드바 CSS 스타일 수정
 st.markdown(
@@ -210,41 +212,41 @@ with st.container():
     for i in range(17, 18):
         data_matrix.append(['-'] * 7)
 
-    st.subheader("종목코드 예시")
+    # "종목코드 예시" 섹션 추가
+    with st.expander("종목코드 예시", expanded=True):  # 기본적으로 펼쳐진 상태로 설정
+        # HTML로 표 생성
+        html = '''
+        <style>
+        table {
+            border-collapse: collapse; 
+            width: 100%; 
+            font-size: 10px;  /* 글자 크기를 10px로 설정 */
+        }
+        td {
+            border: 1px solid black; 
+            padding: 8px; 
+            text-align: center;
+        }
+        .highlight {
+            background-color: lightgray;
+        }
+        </style>
+        <table>
+        '''
+        
+        for i, row in enumerate(data_matrix):
+            html += '<tr>'
+            for j, cell in enumerate(row):
+                # 1행과 4열에 대해 옅은회색 배경 적용
+                if i == 0 or j == 3:
+                    html += f'<td class="highlight">{cell}</td>'
+                else:
+                    html += f'<td>{cell}</td>'
+            html += '</tr>'
+        html += '</table>'
 
-    # HTML로 표 생성
-    html = '''
-    <style>
-    table {
-        border-collapse: collapse; 
-        width: 100%; 
-        font-size: 10px;  /* 글자 크기를 10px로 설정 */
-    }
-    td {
-        border: 1px solid black; 
-        padding: 8px; 
-        text-align: center;
-    }
-    .highlight {
-        background-color: lightgray;
-    }
-    </style>
-    <table>
-    '''
-    
-    for i, row in enumerate(data_matrix):
-        html += '<tr>'
-        for j, cell in enumerate(row):
-            # 1행과 4열에 대해 옅은회색 배경 적용
-            if i == 0 or j == 3:
-                html += f'<td class="highlight">{cell}</td>'
-            else:
-                html += f'<td>{cell}</td>'
-        html += '</tr>'
-    html += '</table>'
-
-    # HTML 출력
-    st.markdown(html, unsafe_allow_html=True)
+        # HTML 출력
+        st.markdown(html, unsafe_allow_html=True)
 
     if codes and date:
         dataframes = []
