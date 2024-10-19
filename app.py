@@ -6,6 +6,7 @@ import streamlit as st
 import FinanceDataReader as fdr
 import datetime
 import pandas as pd
+import yfinance as yf
 
 #서비스 제목 입력
 st.title('주식종목 차트비교 서비스')
@@ -30,30 +31,22 @@ code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 �
 code2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력해 주세요')
 code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력해 주세요')
 
-# KRX와 S&P500의 주식 목록 가져오기
-krx_stock_list = fdr.StockListing('KRX')
-us_stock_list = fdr.StockListing('US')
+# 종목 코드 리스트
+codes = [code1.strip(), code2.strip(), code3.strip()]
 
-# # ETF 목록 가져오기
-# krx_etf_list = fdr.StockListing('KRX-ETF')
-# us_etf_list = fdr.StockListing('S&P500 ETF')
-
-# 모든 종목 및 ETF 목록 결합
-# all_stocks = pd.concat([krx_stock_list, us_stock_list, krx_etf_list, us_etf_list])
-all_stocks = pd.concat([krx_stock_list, us_stock_list])
-
-# 종목코드와 이름을 매칭할 딕셔너리 생성
-stock_dict = dict(zip(all_stocks['Code'], all_stocks['Name']))
-
-# 입력된 종목 코드에 대한 이름 가져오기
-code1_name = stock_dict.get(code1.strip(), '이름을 찾을 수 없습니다.')
-code2_name = stock_dict.get(code2.strip(), '이름을 찾을 수 없습니다.')
-code3_name = stock_dict.get(code3.strip(), '이름을 찾을 수 없습니다.')
+# 종목 정보 가져오기
+stocks_info = {}
+for code in codes:
+    try:
+        stock = yf.Ticker(code)
+        stocks_info[code] = stock.info['shortName']
+    except Exception as e:
+        stocks_info[code] = '이름을 찾을 수 없습니다.'
 
 # 종목 코드와 이름 표시
-st.write(f"종목코드 1: {code1} ({code1_name})")
-st.write(f"종목코드 2: {code2} ({code2_name})")
-st.write(f"종목코드 3: {code3} ({code3_name})")
+st.write(f"종목코드 1: {code1} ({stocks_info.get(code1.strip(), '이름을 찾을 수 없습니다.')})")
+st.write(f"종목코드 2: {code2} ({stocks_info.get(code2.strip(), '이름을 찾을 수 없습니다.')})")
+st.write(f"종목코드 3: {code3} ({stocks_info.get(code3.strip(), '이름을 찾을 수 없습니다.')})")
 
 # '시점고정비율' 체크박스
 fixed_ratio = st.checkbox("시점고정비율")
