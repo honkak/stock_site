@@ -26,39 +26,6 @@ with col_end_date:
         datetime.datetime.now()
     )
 
-# # 세 개의 종목 코드 입력 필드
-# code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 입력해 주세요')
-# code2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력해 주세요')
-# code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력해 주세요')
-
-# # 종목 코드 리스트
-# codes = [code1.strip(), code2.strip(), code3.strip()]
-
-# # 지수 코드 리스트 (필요에 따라 확장 가능)
-# index_codes = ['KS11', 'DJI', 'JP225', 'KQ11', 'IXIC', 'STOXX50E', 'KS50', 'US500', 'CSI300', 'KS100', 'S&P500', 'VIX', 'KOSPI100', 'HSI', 'KRX100', 'FTSE', 'KS200', 'DAX', 'CAC', 'GSPC'] # 대표적인 지수들 예시
-
-# # 종목 정보 가져오기
-# stocks_info = {}
-# for code in codes:
-#     if code:
-#         try:
-#             # 한국 종목 코드에 .KS 추가, 미국 종목은 그대로 사용, 지수는 ^를 붙여서 사용
-#             if code.isdigit():
-#                 stock = yf.Ticker(f"{code}.KS")
-#             elif code in index_codes:  # 지수 목록에 있는 경우에는 ^ 추가
-#                 stock = yf.Ticker(f"^{code}")
-#             else:
-#                 stock = yf.Ticker(code)
-
-#             stocks_info[code] = stock.info.get('shortName', '이름을 찾을 수 없습니다.')
-#         except Exception as e:
-#             stocks_info[code] = '이름을 찾을 수 없습니다.'
-
-# # 종목 코드와 이름 표시
-# st.write(f"종목코드 1: {code1} ({stocks_info.get(code1.strip(), '이름을 찾을 수 없습니다.')})")
-# st.write(f"종목코드 2: {code2} ({stocks_info.get(code2.strip(), '이름을 찾을 수 없습니다.')})")
-# st.write(f"종목코드 3: {code3} ({stocks_info.get(code3.strip(), '이름을 찾을 수 없습니다.')})")
-
 # 세 개의 종목 코드 입력 필드
 col_code1, col_code2, col_code3 = st.columns(3)
 
@@ -126,26 +93,6 @@ with col4:
 # 입력된 종목 코드를 리스트로 생성
 codes = [code1, code2, code3]
 codes = [code.strip() for code in codes if code]  # 빈 코드 제거
-
-# # 종목 코드에 대한 이름 가져오기 함수
-# def get_stock_names(codes):
-#     names = {}
-#     for code in codes:
-#         try:
-#             df = fdr.DataReader(code, date)
-#             names[code] = df['Name'].iloc[0]  # 첫 번째 행에서 이름 가져오기
-#         except:
-#             names[code] = "이름을 가져오는 데 실패했습니다."
-#     return names
-
-# # 종목 이름 가져오기
-# stock_names = get_stock_names(codes)
-
-# # 표 출력
-# if codes:
-#     for code in codes:
-#         if code in stock_names:
-#             st.write(f"{code}: {stock_names[code]}")
 
 # '미국ETF' 체크박스와 연결된 데이터 행렬
 data_matrix_us_etf = [
@@ -345,7 +292,8 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
 # 데이터 로딩 부분에서 오류 처리
 if codes and start_date and end_date:  # 'date'를 'start_date'와 'end_date'로 수정
     dataframes = []
-
+    names = []
+    
     for code in codes:
         try:
             df = fdr.DataReader(code, start_date, end_date)  # 'date'를 'start_date', 'end_date'로 수정
@@ -356,36 +304,27 @@ if codes and start_date and end_date:  # 'date'를 'start_date'와 'end_date'로
                 dataframes.append(data.rename(code))
             else:
                 dataframes.append(close_prices.rename(code))
+            # 종목명 추가
+            names.append(stocks_info.get(code, code))
         except Exception:  # Exception을 처리하되, 오류 메시지를 표시하지 않음
             st.warning(f"{code}의 데이터를 불러오는 데 문제가 발생했습니다. 확인해 주세요.")
-
-    # if dataframes:
-    #     combined_data = pd.concat(dataframes, axis=1)
-    #     tab1, tab2 = st.tabs(['차트', '데이터'])
-
-    #     with tab1:
-    #         st.line_chart(combined_data, use_container_width=True)
-    #         if fixed_ratio:
-    #             st.write("Y축은 비율로 표시되며, 0%에서 시작합니다.")
-
-    #     with tab2:
-    #         st.dataframe(pd.concat([fdr.DataReader(code, start_date, end_date) for code in codes], keys=codes))
-
-    #     with st.expander('컬럼 설명'):
-    #         st.markdown('''\
-    #         - Open: 시가
-    #         - High: 고가
-    #         - Low: 저가
-    #         - Close: 종가
-    #         - Adj Close: 수정 종가
-    #         - Volume: 거래량
-    #         ''')
 
     # 데이터프레임 리스트가 있을 경우
     if dataframes:
         combined_data = pd.concat(dataframes, axis=1)
-        tab1, tab2 = st.tabs(['차트', '데이터'])
-    
+
+        # 차트 그리기
+        plt.figure(figsize=(10, 5))
+        for i, col in enumerate(combined_df.columns):
+            plt.plot(combined_df.index, combined_df[col], label=names[i])  # 종목명으로 범례 설정
+
+        plt.title('종목 차트')
+        plt.xlabel('날짜')
+        plt.ylabel('변동률 (%)' if fixed_ratio else '종가')
+        plt.legend()
+        st.pyplot(plt)
+        
+        tab1, tab2 = st.tabs(['차트', '데이터'])    
         with tab1:
             st.line_chart(combined_data, use_container_width=True)
             if fixed_ratio:
@@ -401,4 +340,5 @@ if codes and start_date and end_date:  # 'date'를 'start_date'와 'end_date'로
             }
             description_df = pd.DataFrame(column_description)
             st.table(description_df)
+            
 
