@@ -212,28 +212,56 @@ with st.container():
     # for i in range(17, 18):
     #     data_matrix.append(['-'] * 7)
 
-    # "종목코드 예시" 섹션 추가
-    with st.expander("종목코드 예시", expanded=True):  # 기본적으로 펼쳐진 상태로 설정
-        # HTML로 표 생성
-        html = '''
-        <style>
+    # # "종목코드 예시" 섹션 추가
+    # with st.expander("종목코드 예시", expanded=True):  # 기본적으로 펼쳐진 상태로 설정
+    #     # HTML로 표 생성
+    #     html = '''
+    #     <style>
+    #     table {
+    #         border-collapse: collapse; 
+    #         width: 100%; 
+    #         font-size: 10px;  /* 글자 크기를 10px로 설정 */
+    #     }
+    #     td {
+    #         border: 1px solid black; 
+    #         padding: 8px; 
+    #         text-align: center;
+    #     }
+    #     .highlight {
+    #         background-color: lightgray;
+    #     }
+    #     </style>
+    #     <table>
+    #     '''
+    
+    with st.expander("종목코드 예시", expanded=True):
+    html = '''
+    <style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 10px;
+        max-width: 100%;  /* 모바일 화면 크기에 맞춰 테이블 너비를 제한 */
+        overflow-x: auto;  /* 모바일에서 테이블이 넘치면 스크롤 생성을 허용 */
+    }
+    td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+        word-wrap: break-word;  /* 긴 텍스트는 줄바꿈 */
+    }
+    .highlight {
+        background-color: lightgray;
+    }
+    @media screen and (max-width: 600px) {
         table {
-            border-collapse: collapse; 
-            width: 100%; 
-            font-size: 10px;  /* 글자 크기를 10px로 설정 */
+            font-size: 8px;  /* 모바일에서는 글자 크기를 더 작게 조정 */
         }
-        td {
-            border: 1px solid black; 
-            padding: 8px; 
-            text-align: center;
-        }
-        .highlight {
-            background-color: lightgray;
-        }
-        </style>
-        <table>
-        '''
-        
+    }
+    </style>
+    <table>
+    '''
+
         for i, row in enumerate(data_matrix):
             html += '<tr>'
             for j, cell in enumerate(row):
