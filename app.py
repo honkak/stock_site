@@ -302,23 +302,33 @@ import pandas as pd
 
 st.subheader('주식종목 차트비교 서비스')
 
-    # 사이드바 CSS 스타일 수정
-    st.markdown(
-        """
-        <style>
-        .css-1d391kg {
-            width: 400px;  /* 사이드바의 가로 길이를 400px로 설정 */
+# 사이드바 CSS 스타일 수정
+st.markdown(
+    """
+    <style>
+    @media (max-width: 768px) {
+        .css-1d391kg { 
+            display: none; /* 모바일에서 사이드바 숨김 */
         }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
-    
-    with st.sidebar:
-        date = st.date_input(
-            "조회 시작일을 선택해 주세요",
-            datetime.datetime(2024, 1, 1)
-        )
+        .custom-sidebar {
+            display: block; /* 본문에 사이드바 내용 표시 */
+            width: 100%; 
+        }
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# 모바일에서도 사이드바 내용을 본문에 포함
+with st.container():
+    if st.sidebar:
+        st.markdown('<div class="custom-sidebar">', unsafe_allow_html=True)
+
+    date = st.date_input(
+        "조회 시작일을 선택해 주세요",
+        datetime.datetime(2024, 1, 1)
+    ) 
 
     # 세 개의 종목 코드 입력 필드
     code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 입력해 주세요')
