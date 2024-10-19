@@ -247,7 +247,7 @@ with st.container():
         table {
             border-collapse: collapse; 
             width: 100%; 
-            font-size: 10px;  /* 글자 크기를 10px로 설정 */
+            font-size: 7px;  /* 글자 크기를 10px로 설정 */
         }
         td {
             border: 1px solid black; 
