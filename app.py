@@ -74,13 +74,13 @@ col_name1, col_name2, col_name3 = st.columns(3)
 #     st.write(f"{code3} ({stocks_info.get(code3.strip(), '')})")
 
 with col_name1:
-    st.markdown(f"<span style='color: blue;'>({stocks_info.get(code1.strip(), '')})</span>", unsafe_allow_html=True)
+    st.markdown(f"<span style='color: blue;'>{code1}({stocks_info.get(code1.strip(), '')})</span>", unsafe_allow_html=True)
 
 with col_name2:
-    st.markdown(f"<span style='color: skyblue;'>({stocks_info.get(code2.strip(), '')})</span>", unsafe_allow_html=True)
+    st.markdown(f"<span style='color: skyblue;'>{code2}({stocks_info.get(code2.strip(), '')})</span>", unsafe_allow_html=True)
 
 with col_name3:
-    st.markdown(f"<span style='color: red;'>({stocks_info.get(code3.strip(), '')})</span>", unsafe_allow_html=True)
+    st.markdown(f"<span style='color: red;'>{code3}({stocks_info.get(code3.strip(), '')})</span>", unsafe_allow_html=True)
 
 # '시점고정비율' 체크박스
 fixed_ratio = st.checkbox("시점고정비율")
