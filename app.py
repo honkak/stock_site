@@ -431,7 +431,7 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
         for i, row in enumerate(data_matrix_index):
             html_index += '<tr>'
             for j, cell in enumerate(row):
-                if i == 0 or j == 0 or j == 2 or j == 4:
+                if i == 0 or j == 1 or j == 3 or j == 5:
                     html_index += f'<td class="highlight">{cell}</td>'
                 else:
                     html_index += f'<td>{cell}</td>'
