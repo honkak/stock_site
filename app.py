@@ -241,17 +241,14 @@ with st.container():
             border-collapse: collapse;
             width: 100%;
             font-size: 10px;
-            table-layout: fixed;  /* 열 너비를 고정하여 비율로 나누기 */
-            overflow-x: auto;  /* 테이블 넘칠 시 가로 스크롤 허용 */
+            max-width: 100%;  /* 모바일 화면 크기에 맞춰 테이블 너비를 제한 */
+            overflow-x: auto;  /* 모바일에서 테이블이 넘치면 스크롤 생성을 허용 */
         }
         td {
             border: 1px solid black;
             padding: 8px;
             text-align: center;
-            white-space: nowrap;  /* 줄바꿈을 방지 */
-            overflow: hidden;  /* 넘친 텍스트를 숨김 */
-            text-overflow: ellipsis;  /* 넘친 텍스트 뒤에 '...' 표시 */
-            font-size: 10px;  /* 기본 글자 크기 */
+            word-wrap: break-word;  /* 긴 텍스트는 줄바꿈 */
         }
         .highlight {
             background-color: lightgray;
@@ -259,10 +256,6 @@ with st.container():
         @media screen and (max-width: 600px) {
             table {
                 font-size: 8px;  /* 모바일에서는 글자 크기를 더 작게 조정 */
-            }
-            td {
-                padding: 4px;
-                font-size: 8px;  /* 작은 화면에서 글자 크기 축소 */
             }
         }
         </style>
