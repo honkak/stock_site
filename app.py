@@ -359,30 +359,49 @@ if codes and start_date and end_date:  # 'date'를 'start_date'와 'end_date'로
         except Exception:  # Exception을 처리하되, 오류 메시지를 표시하지 않음
             st.warning(f"{code}의 데이터를 불러오는 데 문제가 발생했습니다. 확인해 주세요.")
 
+    # if dataframes:
+    #     combined_data = pd.concat(dataframes, axis=1)
+    #     tab1, tab2 = st.tabs(['차트', '데이터'])
+
+    #     with tab1:
+    #         st.line_chart(combined_data, use_container_width=True)
+    #         if fixed_ratio:
+    #             st.write("Y축은 비율로 표시되며, 0%에서 시작합니다.")
+
+    #     with tab2:
+    #         st.dataframe(pd.concat([fdr.DataReader(code, start_date, end_date) for code in codes], keys=codes))
+
+    #     with st.expander('컬럼 설명'):
+    #         st.markdown('''\
+    #         - Open: 시가
+    #         - High: 고가
+    #         - Low: 저가
+    #         - Close: 종가
+    #         - Adj Close: 수정 종가
+    #         - Volume: 거래량
+    #         ''')
+
+    # 데이터프레임 리스트가 있을 경우
     if dataframes:
         combined_data = pd.concat(dataframes, axis=1)
         tab1, tab2 = st.tabs(['차트', '데이터'])
-
+    
         with tab1:
             st.line_chart(combined_data, use_container_width=True)
             if fixed_ratio:
                 st.write("Y축은 비율로 표시되며, 0%에서 시작합니다.")
-
+    
         with tab2:
             st.dataframe(pd.concat([fdr.DataReader(code, start_date, end_date) for code in codes], keys=codes))
-
-        with st.expander('컬럼 설명'):
-            st.markdown('''\
-            - Open: 시가
-            - High: 고가
-            - Low: 저가
-            - Close: 종가
-            - Adj Close: 수정 종가
-            - Volume: 거래량
-            ''')
-
-
-
+            
+            # 컬럼 설명을 표 형식으로 표시
+            column_description = {
+                '컬럼명': ['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume'],
+                '설명': ['시가', '고가', '저가', '종가', '수정 종가', '거래량']
+            }
+            description_df = pd.DataFrame(column_description)
+            st.table(description_df)
+    
 
 
 
