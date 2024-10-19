@@ -59,10 +59,10 @@ with col_end_date:
 # st.write(f"종목코드 2: {code2} ({stocks_info.get(code2.strip(), '이름을 찾을 수 없습니다.')})")
 # st.write(f"종목코드 3: {code3} ({stocks_info.get(code3.strip(), '이름을 찾을 수 없습니다.')})")
 
-# 세 개의 종목 코드 입력 필드
-code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 입력해 주세요')
-code2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력해 주세요')
-code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력해 주세요')
+# # 세 개의 종목 코드 입력 필드
+# code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 입력해 주세요')
+# code2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력해 주세요')
+# code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력해 주세요')
 
 # 종목 코드 리스트
 codes = [code1.strip(), code2.strip(), code3.strip()]
@@ -96,9 +96,9 @@ st.write(f"종목코드 3: {code3} ({stocks_info.get(code3.strip(), '이름을 �
 col1, col2 = st.columns(2)
 
 with col1:
-    종목코드1 = st.text_input('종목코드1')
-    종목코드2 = st.text_input('종목코드2')
-    종목코드3 = st.text_input('종목코드3')
+    종목코드1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 입력해 주세요')
+    종목코드2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력해 주세요')
+    종목코드3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력해 주세요')
 
 # 종목코드에 따른 이름을 오른쪽 열에 표시
 with col2:
