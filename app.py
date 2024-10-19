@@ -169,25 +169,31 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# PC와 모바일에서 모두 사이드바 내용 표시
+# 사이드바 내용 생성
+with st.sidebar:
+    date = st.date_input(
+        "조회 시작일을 선택해 주세요",
+        datetime.datetime(2024, 1, 1)
+    )
+
+    # 세 개의 종목 코드 입력 필드
+    code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 입력해 주세요')
+    code2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력해 주세요')
+    code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력해 주세요')
+
+    # '시점고정비율' 체크박스
+    fixed_ratio = st.checkbox("시점고정비율")
+
+    # 입력된 종목 코드를 리스트로 생성
+    codes = [code1, code2, code3]
+    codes = [code.strip() for code in codes if code]  # 빈 코드 제거
+
+# 모바일에서도 사이드바 내용을 본문에 포함
 if st.sidebar:
-    with st.sidebar:
-        date = st.date_input(
-            "조회 시작일을 선택해 주세요",
-            datetime.datetime(2024, 1, 1)
-        )
+    with st.container():
+        st.markdown('<div class="custom-sidebar">', unsafe_allow_html=True)
 
-        # 세 개의 종목 코드 입력 필드
-        code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 입력해 주세요')
-        code2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력해 주세요')
-        code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력해 주세요')
-
-        # '시점고정비율' 체크박스
-        fixed_ratio = st.checkbox("시점고정비율")
-
-        # 입력된 종목 코드를 리스트로 생성
-        codes = [code1, code2, code3]
-        codes = [code.strip() for code in codes if code]  # 빈 코드 제거
+        st.subheader("종목코드 예시")
 
         # 24행 * 7열의 표 내용 생성
         data_matrix = [
@@ -213,8 +219,6 @@ if st.sidebar:
         # 나머지 행을 '-'로 채우기
         for i in range(17, 18):
             data_matrix.append(['-'] * 7)
-
-        st.subheader("종목코드 예시")
 
         # HTML로 표 생성
         html = '''
@@ -249,6 +253,8 @@ if st.sidebar:
 
         # HTML 출력
         st.markdown(html, unsafe_allow_html=True)
+
+        st.markdown('</div>', unsafe_allow_html=True)
 
 if codes and date:
     dataframes = []
@@ -289,4 +295,5 @@ if codes and date:
             - Adj Close: 수정 종가
             - Volume: 거래량
             ''')
+
 
