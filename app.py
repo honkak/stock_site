@@ -26,10 +26,50 @@ with col_end_date:
         datetime.datetime.now()
     )
 
+# # 세 개의 종목 코드 입력 필드
+# code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 입력해 주세요')
+# code2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력해 주세요')
+# code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력해 주세요')
+
+# # 종목 코드 리스트
+# codes = [code1.strip(), code2.strip(), code3.strip()]
+
+# # 지수 코드 리스트 (필요에 따라 확장 가능)
+# index_codes = ['KS11', 'DJI', 'JP225', 'KQ11', 'IXIC', 'STOXX50E', 'KS50', 'US500', 'CSI300', 'KS100', 'S&P500', 'VIX', 'KOSPI100', 'HSI', 'KRX100', 'FTSE', 'KS200', 'DAX', 'CAC', 'GSPC'] # 대표적인 지수들 예시
+
+# # 종목 정보 가져오기
+# stocks_info = {}
+# for code in codes:
+#     if code:
+#         try:
+#             # 한국 종목 코드에 .KS 추가, 미국 종목은 그대로 사용, 지수는 ^를 붙여서 사용
+#             if code.isdigit():
+#                 stock = yf.Ticker(f"{code}.KS")
+#             elif code in index_codes:  # 지수 목록에 있는 경우에는 ^ 추가
+#                 stock = yf.Ticker(f"^{code}")
+#             else:
+#                 stock = yf.Ticker(code)
+
+#             stocks_info[code] = stock.info.get('shortName', '이름을 찾을 수 없습니다.')
+#         except Exception as e:
+#             stocks_info[code] = '이름을 찾을 수 없습니다.'
+
+# # 종목 코드와 이름 표시
+# st.write(f"종목코드 1: {code1} ({stocks_info.get(code1.strip(), '이름을 찾을 수 없습니다.')})")
+# st.write(f"종목코드 2: {code2} ({stocks_info.get(code2.strip(), '이름을 찾을 수 없습니다.')})")
+# st.write(f"종목코드 3: {code3} ({stocks_info.get(code3.strip(), '이름을 찾을 수 없습니다.')})")
+
 # 세 개의 종목 코드 입력 필드
-code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 입력해 주세요')
-code2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력해 주세요')
-code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력해 주세요')
+col_code1, col_code2, col_code3 = st.columns(3)
+
+with col_code1:
+    code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 입력해 주세요')
+
+with col_code2:
+    code2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력해 주세요')
+
+with col_code3:
+    code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력해 주세요')
 
 # 종목 코드 리스트
 codes = [code1.strip(), code2.strip(), code3.strip()]
@@ -54,11 +94,17 @@ for code in codes:
         except Exception as e:
             stocks_info[code] = '이름을 찾을 수 없습니다.'
 
-# 종목 코드와 이름 표시
-st.write(f"종목코드 1: {code1} ({stocks_info.get(code1.strip(), '이름을 찾을 수 없습니다.')})")
-st.write(f"종목코드 2: {code2} ({stocks_info.get(code2.strip(), '이름을 찾을 수 없습니다.')})")
-st.write(f"종목코드 3: {code3} ({stocks_info.get(code3.strip(), '이름을 찾을 수 없습니다.')})")
+# 종목 코드와 이름 좌우 배열로 표시
+col_name1, col_name2, col_name3 = st.columns(3)
 
+with col_name1:
+    st.write(f"{code1} ({stocks_info.get(code1.strip(), '이름을 찾을 수 없습니다.')})")
+
+with col_name2:
+    st.write(f"{code2} ({stocks_info.get(code2.strip(), '이름을 찾을 수 없습니다.')})")
+
+with col_name3:
+    st.write(f"{code3} ({stocks_info.get(code3.strip(), '이름을 찾을 수 없습니다.')})")
 
 # '시점고정비율' 체크박스
 fixed_ratio = st.checkbox("시점고정비율")
