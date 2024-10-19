@@ -236,7 +236,11 @@ with st.container():
     
     with st.expander("종목코드 예시", expanded=True):
         html = '''
+        
         <style>
+        .stExpander {
+            border: none;  /* expander의 테두리를 제거 */
+        }
         table {
             border-collapse: collapse;
             width: 100%;
