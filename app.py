@@ -521,17 +521,17 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
         <table>
         '''
         
-        for i, row in enumerate(data_matrix_top_stocks):
-            html_top_stocks += '<tr>'
+        for i, row in enumerate(data_matrix_kr_etf):
+            html_kr_etf += '<tr>'
             for j, cell in enumerate(row):
-                if i == 0 or j == 1 or j == 3:
-                    html_top_stocks += f'<td class="highlight">{cell}</td>'
+                if i == 0 or j % 2 == 0:  # 첫 번째 행과 코드 열 강조
+                    html_kr_etf += f'<td class="highlight">{cell}</td>'
                 else:
-                    html_top_stocks += f'<td>{cell}</td>'
-            html_top_stocks += '</tr>'
-        html_top_stocks += '</table>'
-        st.markdown(html_top_stocks, unsafe_allow_html=True)
-
+                    html_kr_etf += f'<td>{cell}</td>'
+            html_kr_etf += '</tr>'
+        html_kr_etf += '</table>'
+        st.markdown(html_kr_etf, unsafe_allow_html=True)
+        
 if codes and date:
     dataframes = []
     
