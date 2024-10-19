@@ -337,8 +337,8 @@ with col4:
 codes = [code1, code2, code3]
 codes = [code.strip() for code in codes if code]  # 빈 코드 제거
 
-# 24행 * 7열의 표 내용 생성
-data_matrix = [
+# '미국ETF' 체크박스와 연결된 데이터 행렬
+data_matrix_us_etf = [
     ['-3X', '-2X', '-1X', '코드', '1X', '2X', '3X'],  # 1행
     ['SPXU', 'SDS', 'SH', 'S&P500', 'SPY', 'SSO', 'UPRO'],  # 2행
     ['SQQQ', 'QID', 'PSQ', '나스닥100', 'QQQ', 'QLD', 'TQQQ'],  # 3행
@@ -358,47 +358,104 @@ data_matrix = [
     ['', '', '', '농산물', 'DBA', '', ''],  # 17행
 ]
 
-# 나머지 행을 '-'로 채우기
-for i in range(17, 18):
-    data_matrix.append(['-'] * 7)
+# '지수' 체크박스와 연결된 데이터 행렬
+data_matrix_index = [
+    ['한국 지수'],
+    ['심볼', '설명'],
+    ['KS11', 'KOSPI 지수'],
+    ['KQ11', 'KOSDAQ 지수'],
+    ['KS50', 'KOSPI 50 지수'],
+    ['KS100', 'KOSPI 100'],
+    ['KRX100', 'KRX 100'],
+    ['KS200', '코스피 200'],
+    ['미국 지수'],
+    ['심볼', '설명'],
+    ['DJI', '다우존스 지수'],
+    ['IXIC', '나스닥 지수'],
+    ['US500', 'S&P 500 지수'],
+    ['VIX', 'S&P 500 VIX'],
+    ['기타 지수'],
+    ['심볼', '설명'],
+    ['JP225', '닛케이 225 선물'],
+    ['STOXX50E', 'Euro Stoxx 50'],
+    ['CSI300', 'CSI 300 (중국)'],
+    ['HSI', '항셍 (홍콩)'],
+    ['FTSE', '영국 FTSE'],
+    ['DAX', '독일 DAX 30'],
+    ['CAC', '프랑스 CAC 40'],
+]
 
 # '종목코드 예시'와 표 출력
 if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
     st.subheader("종목코드 예시")
     
-    # HTML로 표 생성
-    html = '''
-    <style>
-    table {
-        border-collapse: collapse; 
-        width: 100%; 
-        font-size: 10px;  /* 글자 크기를 10px로 설정 */
-    }
-    td {
-        border: 1px solid black; 
-        padding: 8px; 
-        text-align: center;
-    }
-    .highlight {
-        background-color: lightgray;
-    }
-    </style>
-    <table>
-    '''
-    
-    for i, row in enumerate(data_matrix):
-        html += '<tr>'
-        for j, cell in enumerate(row):
-            # 1행과 4열에 대해 옅은회색 배경 적용
-            if i == 0 or j == 3:
-                html += f'<td class="highlight">{cell}</td>'
-            else:
-                html += f'<td>{cell}</td>'
-        html += '</tr>'
-    html += '</table>'
+    if show_us_etf:
+        # 미국ETF 표 출력
+        html = '''
+        <style>
+        table {
+            border-collapse: collapse; 
+            width: 100%; 
+            font-size: 10px;  /* 글자 크기를 10px로 설정 */
+        }
+        td {
+            border: 1px solid black; 
+            padding: 8px; 
+            text-align: center;
+        }
+        .highlight {
+            background-color: lightgray;
+        }
+        </style>
+        <table>
+        '''
+        
+        for i, row in enumerate(data_matrix_us_etf):
+            html += '<tr>'
+            for j, cell in enumerate(row):
+                if i == 0 or j == 3:
+                    html += f'<td class="highlight">{cell}</td>'
+                else:
+                    html += f'<td>{cell}</td>'
+            html += '</tr>'
+        html += '</table>'
 
-    # HTML 출력
-    st.markdown(html, unsafe_allow_html=True)
+        # HTML 출력
+        st.markdown(html, unsafe_allow_html=True)
+    
+    if show_major_index:
+        # 지수 표 출력
+        html_index = '''
+        <style>
+        table {
+            border-collapse: collapse; 
+            width: 100%; 
+            font-size: 10px;  /* 글자 크기를 10px로 설정 */
+        }
+        td {
+            border: 1px solid black; 
+            padding: 8px; 
+            text-align: center;
+        }
+        .highlight {
+            background-color: lightgray;
+        }
+        </style>
+        <table>
+        '''
+        
+        for i, row in enumerate(data_matrix_index):
+            html_index += '<tr>'
+            for j, cell in enumerate(row):
+                if i == 0 or j == 0:
+                    html_index += f'<td class="highlight">{cell}</td>'
+                else:
+                    html_index += f'<td>{cell}</td>'
+            html_index += '</tr>'
+        html_index += '</table>'
+
+        # HTML 출력
+        st.markdown(html_index, unsafe_allow_html=True)
 
 if codes and date:
     dataframes = []
@@ -421,11 +478,9 @@ if codes and date:
         tab1, tab2 = st.tabs(['차트', '데이터'])
 
         with tab1:
+            st.line_chart(combined_data, use_container_width=True)  # 가로 크기를 컨테이너에 맞춤
             if fixed_ratio:
-                st.line_chart(combined_data, use_container_width=True)  # 가로 크기를 컨테이너에 맞춤
                 st.write("Y축은 비율로 표시되며, 0%에서 시작합니다.")
-            else:
-                st.line_chart(combined_data, use_container_width=True)  # 가로 크기를 컨테이너에 맞춤
 
         with tab2:
             st.dataframe(pd.concat([fdr.DataReader(code, date) for code in codes], keys=codes))
@@ -439,6 +494,7 @@ if codes and date:
             - Adj Close: 수정 종가
             - Volume: 거래량
             ''')
+
 
 
 
