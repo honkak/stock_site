@@ -43,9 +43,6 @@ with col_end_date:
 #     except Exception as e:
 #         stocks_info[code] = '이름을 찾을 수 없습니다.'
 
-import streamlit as st
-import yfinance as yf
-
 # 세 개의 종목 코드 입력 필드
 code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 입력해 주세요')
 code2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력해 주세요')
@@ -59,22 +56,19 @@ stocks_info = {}
 for code in codes:
     if code:
         try:
-            # 한국 종목 코드에 .KS 추가, 미국 종목은 그대로 사용
+            # 한국 종목 코드에 .KS 추가, 미국 종목은 그대로 사용, 지수는 ^를 붙여서 사용
             if code.isdigit():
                 stock = yf.Ticker(f"{code}.KS")
+            elif code.isalpha() and code.isupper():
+                stock = yf.Ticker(f"^{code}")
             else:
                 stock = yf.Ticker(code)
 
-            # 지수는 info 대신 history로 확인
-            if "^" in code:  # 지수인 경우
-                hist = stock.history(period="1d")
-                stocks_info[code] = f"지수 데이터 (현재가: {hist['Close'].values[0]})" if not hist.empty else '이름을 찾을 수 없습니다.'
-            else:
-                stocks_info[code] = stock.info.get('shortName', '이름을 찾을 수 없습니다.')
+            stocks_info[code] = stock.info.get('shortName', '이름을 찾을 수 없습니다.')
         except Exception as e:
             stocks_info[code] = '이름을 찾을 수 없습니다.'
 
-# 종목 코드와 이름 또는 지수 데이터 표시
+# 종목 코드와 이름 표시
 st.write(f"종목코드 1: {code1} ({stocks_info.get(code1.strip(), '이름을 찾을 수 없습니다.')})")
 st.write(f"종목코드 2: {code2} ({stocks_info.get(code2.strip(), '이름을 찾을 수 없습니다.')})")
 st.write(f"종목코드 3: {code3} ({stocks_info.get(code3.strip(), '이름을 찾을 수 없습니다.')})")
