@@ -323,13 +323,15 @@ fixed_ratio = st.checkbox("시점고정비율")
 st.markdown("---")
 
 # 체크박스 그룹
-col1, col2, col3 = st.columns(3)
+col1, col2, col3, col4 = st.columns(4)
 with col1:
-    show_us_etf = st.checkbox("미국ETF", value=True)
+    show_major_index = st.checkbox("지수", value=False)
 with col2:
-    show_major_index = st.checkbox("주요지수", value=False)
-with col3:
     show_major_stocks = st.checkbox("주요종목", value=False)
+with col3:
+    show_us_etf = st.checkbox("미국ETF", value=True)
+with col4:
+    show_kr_etf = st.checkbox("한국ETF", value=False)
 
 # 입력된 종목 코드를 리스트로 생성
 codes = [code1, code2, code3]
@@ -361,7 +363,7 @@ for i in range(17, 18):
     data_matrix.append(['-'] * 7)
 
 # '종목코드 예시'와 표 출력
-if show_us_etf or show_major_index or show_major_stocks:
+if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
     st.subheader("종목코드 예시")
     
     # HTML로 표 생성
@@ -437,6 +439,7 @@ if codes and date:
             - Adj Close: 수정 종가
             - Volume: 거래량
             ''')
+
 
 
 
