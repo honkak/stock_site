@@ -361,12 +361,12 @@ data_matrix_us_etf = [
 # '지수' 체크박스와 연결된 데이터 행렬
 data_matrix_index = [
     ['한국코드', '설명', '미국코드', '설명', '기타코드', '설명'],  # 1행
-    ['KS11', 'KOSPI지수', 'DJI', '다우존스', 'JP225', '설명'],  # 2행
-    ['KQ11', 'KOSDAQ지수', 'IXIC', '나스닥', 'STOXX50E', '설명'],  # 3행
-    ['KS50', 'KOSPI50지수', 'US500', 'S&P500', 'CSI300', '설명'],  # 4행
-    ['KS100', 'KOSPI100', 'VIX', 'S&P500VIX', 'HSI', '설명'],  # 5행
-    ['KRX100', 'KRX100', '-', '-', '기타지수', 'FTSE'],  # 6행
-    ['KS200', '코스피200', '-', '-', '기타지수', 'DAX'],  # 7행
+    ['KS11', 'KOSPI지수', 'DJI', '다우존스', 'JP225', '닛케이225선물'],  # 2행
+    ['KQ11', 'KOSDAQ지수', 'IXIC', '나스닥', 'STOXX50E', 'EuroStoxx50'],  # 3행
+    ['KS50', 'KOSPI50지수', 'US500', 'S&P500', 'CSI300', 'CSI300(중국)'],  # 4행
+    ['KS100', 'KOSPI100', 'VIX', 'S&P500VIX', 'HSI', '항셍(홍콩)'],  # 5행
+    ['KRX100', 'KRX100', '-', '-', 'FTSE', '영국FTSE'],  # 6행
+    ['KS200', '코스피200', '-', '-', 'DAX', '독일DAX30'],  # 7행
 ]
 
 # '종목코드 예시'와 표 출력
@@ -431,7 +431,7 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
         for i, row in enumerate(data_matrix_index):
             html_index += '<tr>'
             for j, cell in enumerate(row):
-                if i == 0 or j == 0:
+                if i == 0 or j == 0 or j == 2 or j == 4:
                     html_index += f'<td class="highlight">{cell}</td>'
                 else:
                     html_index += f'<td>{cell}</td>'
