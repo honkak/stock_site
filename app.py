@@ -10,7 +10,7 @@ st.markdown(
     """
     <style>
     .css-1d391kg {
-        width: 420px;  /* 사이드바의 가로 길이를 420px로 설정 */
+        width: 450px;  /* 사이드바의 가로 길이를 450px로 설정 */
     }
     </style>
     """,
