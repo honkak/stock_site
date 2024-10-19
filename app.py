@@ -32,7 +32,7 @@ code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 �
 
 # KRX와 S&P500의 주식 목록 가져오기
 krx_stock_list = fdr.StockListing('KRX')
-us_stock_list = fdr.StockListing('NASDAQ')
+us_stock_list = fdr.StockListing('US')
 
 # # ETF 목록 가져오기
 # krx_etf_list = fdr.StockListing('KRX-ETF')
