@@ -56,7 +56,7 @@ stocks_info = {}
 for code in codes:
     if code:
         try:
-            # 한국 종목 코드에 .KS 추가, 미국 종목은 그대로 사용
+            # 한국 종목 코드에 .KS 추가, 미국 종목은 그대로 사용, 지수는 그대로 사용
             if code.isdigit():
                 stock = yf.Ticker(f"{code}.KS")
             else:
@@ -69,7 +69,6 @@ for code in codes:
 st.write(f"종목코드 1: {code1} ({stocks_info.get(code1.strip(), '이름을 찾을 수 없습니다.')})")
 st.write(f"종목코드 2: {code2} ({stocks_info.get(code2.strip(), '이름을 찾을 수 없습니다.')})")
 st.write(f"종목코드 3: {code3} ({stocks_info.get(code3.strip(), '이름을 찾을 수 없습니다.')})")
-
 
 # '시점고정비율' 체크박스
 fixed_ratio = st.checkbox("시점고정비율")
