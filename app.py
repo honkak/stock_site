@@ -67,38 +67,13 @@ with col_end_date:
 # 종목 코드 리스트
 codes = [code1.strip(), code2.strip(), code3.strip()]
 
-# 지수 코드 리스트 (필요에 따라 확장 가능)
-index_codes = ['KS11', 'DJI', 'JP225', 'KQ11', 'IXIC', 'STOXX50E', 'US500', 'CSI300', 'VIX', 'HSI', 'FTSE', 'DAX', 'CAC', 'GSPC'] # 대표적인 지수들 예시
-
-# 종목 정보 가져오기
-stocks_info = {}
-for code in codes:
-    if code:
-        try:
-            # 한국 종목 코드에 .KS 추가, 미국 종목은 그대로 사용, 지수는 ^를 붙여서 사용
-            if code.isdigit():
-                stock = yf.Ticker(f"{code}.KS")
-            elif code in index_codes:  # 지수 목록에 있는 경우에는 ^ 추가
-                stock = yf.Ticker(f"^{code}")
-            else:
-                stock = yf.Ticker(code)
-
-            stocks_info[code] = stock.info.get('shortName', '이름을 찾을 수 없습니다.')
-        except Exception as e:
-            stocks_info[code] = '이름을 찾을 수 없습니다.'
-
-# 종목 코드와 이름 표시
-st.write(f"종목코드 1: {code1} ({stocks_info.get(code1.strip(), '이름을 찾을 수 없습니다.')})")
-st.write(f"종목코드 2: {code2} ({stocks_info.get(code2.strip(), '이름을 찾을 수 없습니다.')})")
-st.write(f"종목코드 3: {code3} ({stocks_info.get(code3.strip(), '이름을 찾을 수 없습니다.')})")
-
 # 종목코드를 입력받는 열과 이름을 표시하는 열을 나란히 배치
 col1, col2 = st.columns(2)
 
 with col1:
-    종목코드1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 입력해 주세요')
-    종목코드2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력해 주세요')
-    종목코드3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력해 주세요')
+    code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 입력해 주세요')
+    code2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력해 주세요')
+    code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력해 주세요')
 
 # 종목코드에 따른 이름을 오른쪽 열에 표시
 with col2:
@@ -122,6 +97,31 @@ with col2:
             st.write(f"종목 이름: {name3}")
         except:
             st.write("유효하지 않은 코드입니다.")
+
+# 지수 코드 리스트 (필요에 따라 확장 가능)
+index_codes = ['KS11', 'DJI', 'JP225', 'KQ11', 'IXIC', 'STOXX50E', 'US500', 'CSI300', 'VIX', 'HSI', 'FTSE', 'DAX', 'CAC', 'GSPC'] # 대표적인 지수들 예시
+
+# 종목 정보 가져오기
+stocks_info = {}
+for code in codes:
+    if code:
+        try:
+            # 한국 종목 코드에 .KS 추가, 미국 종목은 그대로 사용, 지수는 ^를 붙여서 사용
+            if code.isdigit():
+                stock = yf.Ticker(f"{code}.KS")
+            elif code in index_codes:  # 지수 목록에 있는 경우에는 ^ 추가
+                stock = yf.Ticker(f"^{code}")
+            else:
+                stock = yf.Ticker(code)
+
+            stocks_info[code] = stock.info.get('shortName', '이름을 찾을 수 없습니다.')
+        except Exception as e:
+            stocks_info[code] = '이름을 찾을 수 없습니다.'
+
+# 종목 코드와 이름 표시
+st.write(f"code1: {code1} ({stocks_info.get(code1.strip(), '이름을 찾을 수 없습니다.')})")
+st.write(f"code2: {code2} ({stocks_info.get(code2.strip(), '이름을 찾을 수 없습니다.')})")
+st.write(f"code3: {code3} ({stocks_info.get(code3.strip(), '이름을 찾을 수 없습니다.')})")
 
 
 # '시점고정비율' 체크박스
