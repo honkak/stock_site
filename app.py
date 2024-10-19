@@ -74,13 +74,13 @@ col_name1, col_name2, col_name3 = st.columns(3)
 #     st.write(f"{code3} ({stocks_info.get(code3.strip(), '')})")
 
 with col_name1:
-    st.write(f"({stocks_info.get(code1.strip(), '')})")  # 종목 코드 제거
+    st.markdown(f"<span style='color: blue; font-weight: bold;'>({stocks_info.get(code1.strip(), '')})</span>", unsafe_allow_html=True)
 
 with col_name2:
-    st.write(f"({stocks_info.get(code2.strip(), '')})")
+    st.markdown(f"<span style='color: skyblue; font-weight: bold;'>({stocks_info.get(code2.strip(), '')})</span>", unsafe_allow_html=True)
 
 with col_name3:
-    st.write(f"({stocks_info.get(code3.strip(), '')})")
+    st.markdown(f"<span style='color: red; font-weight: bold;'>({stocks_info.get(code3.strip(), '')})</span>", unsafe_allow_html=True)
 
 # '시점고정비율' 체크박스
 fixed_ratio = st.checkbox("시점고정비율")
