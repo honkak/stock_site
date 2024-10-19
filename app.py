@@ -300,50 +300,28 @@ import FinanceDataReader as fdr
 import datetime
 import pandas as pd
 
-st.subheader('주식종목 차트비교 서비스')
+st.title('종목 차트 검색')
 
-# 사이드바 CSS 스타일 수정
-st.markdown(
-    """
-    <style>
-    @media (max-width: 768px) {
-        .css-1d391kg { 
-            display: none; /* 모바일에서 사이드바 숨김 */
-        }
-        .custom-sidebar {
-            display: block; /* 본문에 사이드바 내용 표시 */
-            width: 100%; 
-        }
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
+# 날짜 입력
+date = st.date_input(
+    "조회 시작일을 선택해 주세요",
+    datetime.datetime(2024, 1, 1)
 )
 
-# 모바일에서도 사이드바 내용을 본문에 포함
-with st.container():
-    if st.sidebar:
-        st.markdown('<div class="custom-sidebar">', unsafe_allow_html=True)
+# 세 개의 종목 코드 입력 필드
+code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 입력해 주세요')
+code2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력해 주세요')
+code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력해 주세요')
 
-    date = st.date_input(
-        "조회 시작일을 선택해 주세요",
-        datetime.datetime(2024, 1, 1)
-    ) 
+# '시점고정비율' 체크박스
+fixed_ratio = st.checkbox("시점고정비율")
 
-    # 세 개의 종목 코드 입력 필드
-    code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 입력해 주세요')
-    code2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력해 주세요')
-    code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력해 주세요')
+# 표 표시 여부 체크박스
+show_table = st.checkbox("표 표시", value=True)
 
-    # '시점고정비율' 체크박스
-    fixed_ratio = st.checkbox("시점고정비율")
-
-    # 표 표시 여부 체크박스
-    show_table = st.checkbox("표 표시", value=True)
-
-    # 입력된 종목 코드를 리스트로 생성
-    codes = [code1, code2, code3]
-    codes = [code.strip() for code in codes if code]  # 빈 코드 제거
+# 입력된 종목 코드를 리스트로 생성
+codes = [code1, code2, code3]
+codes = [code.strip() for code in codes if code]  # 빈 코드 제거
 
 # 24행 * 7열의 표 내용 생성
 data_matrix = [
@@ -370,44 +348,43 @@ data_matrix = [
 for i in range(17, 18):
     data_matrix.append(['-'] * 7)
 
-# 표 출력 및 스타일링 (사이드바에서 출력)
-with st.sidebar:
-    st.subheader("종목코드 예시")
+# 표 출력 및 스타일링 (본문에서 출력)
+st.subheader("종목코드 예시")
 
-    # HTML로 표 생성
-    if show_table:
-        html = '''
-        <style>
-        table {
-            border-collapse: collapse; 
-            width: 100%; 
-            font-size: 10px;  /* 글자 크기를 10px로 설정 */
-        }
-        td {
-            border: 1px solid black; 
-            padding: 8px; 
-            text-align: center;
-        }
-        .highlight {
-            background-color: lightgray;
-        }
-        </style>
-        <table>
-        '''
-        
-        for i, row in enumerate(data_matrix):
-            html += '<tr>'
-            for j, cell in enumerate(row):
-                # 1행과 4열에 대해 옅은회색 배경 적용
-                if i == 0 or j == 3:
-                    html += f'<td class="highlight">{cell}</td>'
-                else:
-                    html += f'<td>{cell}</td>'
-            html += '</tr>'
-        html += '</table>'
+# HTML로 표 생성
+if show_table:
+    html = '''
+    <style>
+    table {
+        border-collapse: collapse; 
+        width: 100%; 
+        font-size: 10px;  /* 글자 크기를 10px로 설정 */
+    }
+    td {
+        border: 1px solid black; 
+        padding: 8px; 
+        text-align: center;
+    }
+    .highlight {
+        background-color: lightgray;
+    }
+    </style>
+    <table>
+    '''
+    
+    for i, row in enumerate(data_matrix):
+        html += '<tr>'
+        for j, cell in enumerate(row):
+            # 1행과 4열에 대해 옅은회색 배경 적용
+            if i == 0 or j == 3:
+                html += f'<td class="highlight">{cell}</td>'
+            else:
+                html += f'<td>{cell}</td>'
+        html += '</tr>'
+    html += '</table>'
 
-        # HTML 출력
-        st.markdown(html, unsafe_allow_html=True)
+    # HTML 출력
+    st.markdown(html, unsafe_allow_html=True)
 
 if codes and date:
     dataframes = []
@@ -448,4 +425,5 @@ if codes and date:
             - Adj Close: 수정 종가
             - Volume: 거래량
             ''')
+
 
