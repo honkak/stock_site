@@ -30,9 +30,19 @@ code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 �
 code2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력해 주세요')
 code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력해 주세요')
 
-# 주식 리스트 가져오기
-stock_list = fdr.StockListing('KRX','S&P500')  # KRX에서 주식 목록을 가져옴
-stock_dict = dict(zip(stock_list['Code'], stock_list['Name']))  # 종목코드와 이름을 매칭할 딕셔너리 생성
+# KRX와 S&P500의 주식 목록 가져오기
+krx_stock_list = fdr.StockListing('KRX')
+us_stock_list = fdr.StockListing('S&P500')
+
+# ETF 목록 가져오기
+krx_etf_list = fdr.StockListing('KRX ETF')
+us_etf_list = fdr.StockListing('S&P500 ETF')
+
+# 모든 종목 및 ETF 목록 결합
+all_stocks = pd.concat([krx_stock_list, us_stock_list, krx_etf_list, us_etf_list])
+
+# 종목코드와 이름을 매칭할 딕셔너리 생성
+stock_dict = dict(zip(all_stocks['Code'], all_stocks['Name']))
 
 # 입력된 종목 코드에 대한 이름 가져오기
 code1_name = stock_dict.get(code1.strip(), '이름을 찾을 수 없습니다.')
