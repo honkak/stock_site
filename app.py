@@ -320,6 +320,20 @@ fixed_ratio = st.checkbox("시점고정비율")
 # 수평선 추가
 st.markdown("---")
 
+# CSS 2x2 배치 스타일추가
+st.markdown("""
+    <style>
+        @media (max-width: 600px) {
+            .stCheckbox {
+                display: inline-block;
+                width: 48%;
+                box-sizing: border-box;
+                margin: 1%;
+            }
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 # 체크박스 그룹 (순서 변경)
 col1, col2, col3, col4 = st.columns(4)
 with col1:
