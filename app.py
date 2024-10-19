@@ -35,7 +35,7 @@ code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 �
 codes = [code1.strip(), code2.strip(), code3.strip()]
 
 # 지수 코드 리스트 (필요에 따라 확장 가능)
-index_codes = ['DJI', 'IXIC', 'GSPC']  # 대표적인 지수들 예시
+index_codes = ['KS11', 'DJI', 'JP225', 'KQ11', 'IXIC', 'STOXX50E', 'KS50', 'US500', 'CSI300', 'KS100', 'S&P500', 'VIX', 'KOSPI100', 'HSI', 'KRX100', 'FTSE', 'KS200', 'DAX', 'CAC', 'GSPC'] # 대표적인 지수들 예시
 
 # 종목 정보 가져오기
 stocks_info = {}
@@ -126,7 +126,7 @@ data_matrix_index = [
     ['한국코드', '설명', '미국코드', '설명', '기타코드', '설명'],  # 1행
     ['KS11', 'KOSPI지수', 'DJI', '다우존스', 'JP225', '닛케이225선물'],  # 2행
     ['KQ11', 'KOSDAQ지수', 'IXIC', '나스닥', 'STOXX50E', 'EuroStoxx50'],  # 3행
-    ['KS50', 'KOSPI50지수', 'US500', 'S&P500', 'CSI300', 'CSI300(중국)'],  # 4행
+    ['KS50', 'KOSPI50지수', 'GSPC', 'S&P500', 'CSI300', 'CSI300(중국)'],  # 4행
     ['KS100', 'KOSPI100', 'VIX', 'S&P500VIX', 'HSI', '항셍(홍콩)'],  # 5행
     ['KRX100', 'KRX100', '-', '-', 'FTSE', '영국FTSE'],  # 6행
     ['KS200', '코스피200', '-', '-', 'DAX', '독일DAX30'],  # 7행
