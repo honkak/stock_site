@@ -384,6 +384,24 @@ data_matrix_top_stocks = [
     ['JNJ', '존슨앤존슨', '086520', '에코프로'],  # 11행
 ]
 
+# 한국ETF 체크박스와 연결된 데이터 행렬 (4열)
+data_matrix_kr_etf = [
+    ['한국종목코드', '설명', '한국종목코드', '설명'],  # 열 제목
+    ['069500', 'KODEX 200', '122630', 'KODEX 레버리지'],
+    ['229200', 'KODEX 코스닥150', '233740', 'KODEX 코스닥150레버리지'],
+    ['114800', 'KODEX 인버스', '252670', 'KODEX 200선물인버스2X'],
+    ['251340', 'KODEX 코스닥150선물인버스', '442580', 'PLUS 글로벌HBM반도체'],
+    ['243890', 'TIGER 200에너지화학레버리지', '412570', 'TIGER 2차전지TOP10레버리지'],
+    ['463640', 'KODEX 미국S&P500유틸리티', '379800', 'KODEX 미국S&P500TR'],
+    ['379810', 'KODEX 미국나스닥100TR', '449190', 'KODEX 미국나스닥100(H)'],
+    ['409820', 'KODEX 미국나스닥100레버리지(합성 H)', '438100', 'ACE 미국나스닥100채권혼합액티브'],
+    ['447660', 'PLUS 애플채권혼합', '448540', 'ACE 엔비디아채권혼합블룸버그'],
+    ['236350', 'TIGER 인도니프티50레버리지(합성)', '132030', 'KODEX 골드선물(H)'],
+    ['144600', 'KODEX 은선물(H)', '530063', '삼성 레버리지 구리 선물 ETN(H)'],
+    ['530031', '삼성 레버리지 WTI원유 선물 ETN', '530036', '삼성 인버스 2X WTI원유 선물 ETN'],
+    ['438320', 'TIGER 차이나항셍테크레버리지(합성 H)', '371460', 'TIGER 차이나전기차SOLACTIVE'],
+]
+
 # '주요종목' 체크박스를 선택할 때 표 출력
 if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
     # 미국ETF 표 출력
@@ -410,13 +428,45 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
         for i, row in enumerate(data_matrix_us_etf):
             html += '<tr>'
             for j, cell in enumerate(row):
-                if i == 0 or j == 3:
+                if i == 0 or j % 2 == 0:  # 첫 번째 행과 코드 열 강조
                     html += f'<td class="highlight">{cell}</td>'
                 else:
                     html += f'<td>{cell}</td>'
             html += '</tr>'
         html += '</table>'
         st.markdown(html, unsafe_allow_html=True)
+
+    # 주요종목 표 출력
+    if show_major_stocks:
+        html_major_stocks = '''
+        <style>
+        table {
+            border-collapse: collapse; 
+            width: 100%; 
+            font-size: 10px;  /* 글자 크기를 10px로 설정 */
+        }
+        td {
+            border: 1px solid black; 
+            padding: 8px; 
+            text-align: center;
+        }
+        .highlight {
+            background-color: lightgray;
+        }
+        </style>
+        <table>
+        '''
+        
+        for i, row in enumerate(data_matrix_top_stocks):
+            html_major_stocks += '<tr>'
+            for j, cell in enumerate(row):
+                if i == 0 or j % 2 == 0:  # 첫 번째 행과 코드 열 강조
+                    html_major_stocks += f'<td class="highlight">{cell}</td>'
+                else:
+                    html_major_stocks += f'<td>{cell}</td>'
+            html_major_stocks += '</tr>'
+        html_major_stocks += '</table>'
+        st.markdown(html_major_stocks, unsafe_allow_html=True)
 
     # 지수 표 출력
     if show_major_index:
@@ -442,7 +492,7 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
         for i, row in enumerate(data_matrix_index):
             html_index += '<tr>'
             for j, cell in enumerate(row):
-                if i == 0 or j == 1 or j == 3 or j == 5:
+                if i == 0 or j % 2 == 0:  # 첫 번째 행과 코드 열 강조
                     html_index += f'<td class="highlight">{cell}</td>'
                 else:
                     html_index += f'<td>{cell}</td>'
@@ -450,9 +500,9 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
         html_index += '</table>'
         st.markdown(html_index, unsafe_allow_html=True)
 
-    # 주요종목 표 출력
-    if show_major_stocks:
-        html_top_stocks = '''
+    # 한국ETF 표 출력
+    if show_kr_etf:
+        html_kr_etf = '''
         <style>
         table {
             border-collapse: collapse; 
