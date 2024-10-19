@@ -247,13 +247,14 @@ with st.container():
         table {
             border-collapse: collapse; 
             width: auto;  /* 전체 너비를 자동으로 설정 */
+            max-width: none;  /* 최대 너비 설정 제거 */
             font-size: 8px;  /* 글자 크기를 8px로 설정 */
         }
         td {
             border: 1px solid black; 
             padding: 4px;  /* 셀 패딩을 줄여서 열 너비를 줄임 */
             text-align: center;
-            width: 3%;  /* 기본 열 너비 설정 (4열 제외) */
+            width: 6%;  /* 기본 열 너비 설정 (4열 제외) */
         }
         td:nth-child(4) {  /* 4열에 대한 스타일 */
             width: 3%;  /* 4열의 너비를 더 좁게 설정 */
