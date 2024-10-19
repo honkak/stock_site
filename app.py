@@ -35,8 +35,8 @@ krx_stock_list = fdr.StockListing('KRX')
 us_stock_list = fdr.StockListing('S&P500')
 
 # ETF 목록 가져오기
-krx_etf_list = fdr.StockListing('KRX ETF')
-us_etf_list = fdr.StockListing('S&P500 ETF')
+krx_etf_list = fdr.StockListing('KRX-ETF')
+us_etf_list = fdr.StockListing('S&P500-ETF')
 
 # 모든 종목 및 ETF 목록 결합
 all_stocks = pd.concat([krx_stock_list, us_stock_list, krx_etf_list, us_etf_list])
