@@ -75,25 +75,28 @@ with col1:
     code2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력해 주세요')
     code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력해 주세요')
 
+# 종목 코드 리스트
+codes = [code1.strip(), code2.strip(), code3.strip()]
+
 # 종목코드에 따른 이름을 오른쪽 열에 표시
 with col2:
-    if 종목코드1:
+    if code1:
         try:
-            name1 = fdr.StockListing('KRX')[fdr.StockListing('KRX')['Symbol'] == 종목코드1]['Name'].values[0]
+            name1 = fdr.StockListing('KRX')[fdr.StockListing('KRX')['Symbol'] == code1]['Name'].values[0]
             st.write(f"종목 이름: {name1}")
         except:
             st.write("유효하지 않은 코드입니다.")
     
-    if 종목코드2:
+    if code2:
         try:
-            name2 = fdr.StockListing('KRX')[fdr.StockListing('KRX')['Symbol'] == 종목코드2]['Name'].values[0]
+            name2 = fdr.StockListing('KRX')[fdr.StockListing('KRX')['Symbol'] == code2]['Name'].values[0]
             st.write(f"종목 이름: {name2}")
         except:
             st.write("유효하지 않은 코드입니다.")
     
-    if 종목코드3:
+    if code3:
         try:
-            name3 = fdr.StockListing('KRX')[fdr.StockListing('KRX')['Symbol'] == 종목코드3]['Name'].values[0]
+            name3 = fdr.StockListing('KRX')[fdr.StockListing('KRX')['Symbol'] == code3]['Name'].values[0]
             st.write(f"종목 이름: {name3}")
         except:
             st.write("유효하지 않은 코드입니다.")
