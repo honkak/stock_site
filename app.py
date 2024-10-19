@@ -241,21 +241,25 @@ with st.container():
             border-collapse: collapse;
             width: 100%;
             font-size: 10px;
-            max-width: 100%;  /* 모바일 화면 크기에 맞춰 테이블 너비를 제한 */
-            overflow-x: auto;  /* 모바일에서 테이블이 넘치면 스크롤 생성을 허용 */
+            table-layout: fixed;  /* 열 너비를 고정하여 비율로 나누기 */
+            overflow-x: auto;  /* 모바일에서 테이블 넘칠 시 스크롤 */
         }
         td {
             border: 1px solid black;
             padding: 8px;
             text-align: center;
-            word-wrap: break-word;  /* 긴 텍스트는 줄바꿈 */
+            word-wrap: break-word;  /* 긴 텍스트 줄바꿈 */
+            width: 10%;  /* 열의 너비를 10%로 설정하여 고정 */
         }
         .highlight {
             background-color: lightgray;
         }
         @media screen and (max-width: 600px) {
             table {
-                font-size: 8px;  /* 모바일에서는 글자 크기를 더 작게 조정 */
+                font-size: 8px;  /* 모바일에서는 글자 크기를 더 작게 */
+            }
+            td {
+                padding: 4px;  /* 모바일에서 패딩을 줄여 공간 절약 */
             }
         }
         </style>
