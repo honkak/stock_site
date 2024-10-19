@@ -30,6 +30,20 @@ code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 �
 code2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력해 주세요')
 code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력해 주세요')
 
+# 주식 리스트 가져오기
+stock_list = fdr.StockListing('KRX')  # KRX에서 주식 목록을 가져옴
+stock_dict = dict(zip(stock_list['Code'], stock_list['Name']))  # 종목코드와 이름을 매칭할 딕셔너리 생성
+
+# 입력된 종목 코드에 대한 이름 가져오기
+code1_name = stock_dict.get(code1.strip(), '이름을 찾을 수 없습니다.')
+code2_name = stock_dict.get(code2.strip(), '이름을 찾을 수 없습니다.')
+code3_name = stock_dict.get(code3.strip(), '이름을 찾을 수 없습니다.')
+
+# 종목 코드와 이름 표시
+st.write(f"종목코드 1: {code1} ({code1_name})")
+st.write(f"종목코드 2: {code2} ({code2_name})")
+st.write(f"종목코드 3: {code3} ({code3_name})")
+
 # '시점고정비율' 체크박스
 fixed_ratio = st.checkbox("시점고정비율")
 
@@ -51,25 +65,25 @@ with col4:
 codes = [code1, code2, code3]
 codes = [code.strip() for code in codes if code]  # 빈 코드 제거
 
-# 종목 코드에 대한 이름 가져오기 함수
-def get_stock_names(codes):
-    names = {}
-    for code in codes:
-        try:
-            df = fdr.DataReader(code, date)
-            names[code] = df['Name'].iloc[0]  # 첫 번째 행에서 이름 가져오기
-        except:
-            names[code] = "이름을 가져오는 데 실패했습니다."
-    return names
+# # 종목 코드에 대한 이름 가져오기 함수
+# def get_stock_names(codes):
+#     names = {}
+#     for code in codes:
+#         try:
+#             df = fdr.DataReader(code, date)
+#             names[code] = df['Name'].iloc[0]  # 첫 번째 행에서 이름 가져오기
+#         except:
+#             names[code] = "이름을 가져오는 데 실패했습니다."
+#     return names
 
-# 종목 이름 가져오기
-stock_names = get_stock_names(codes)
+# # 종목 이름 가져오기
+# stock_names = get_stock_names(codes)
 
-# 표 출력
-if codes:
-    for code in codes:
-        if code in stock_names:
-            st.write(f"{code}: {stock_names[code]}")
+# # 표 출력
+# if codes:
+#     for code in codes:
+#         if code in stock_names:
+#             st.write(f"{code}: {stock_names[code]}")
 
 # '미국ETF' 체크박스와 연결된 데이터 행렬
 data_matrix_us_etf = [
