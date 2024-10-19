@@ -371,7 +371,7 @@ data_matrix_index = [
 
 # '종목코드 예시'와 표 출력
 if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
-    st.subheader("종목코드 예시")
+    # st.subheader("종목코드 예시")
     
     if show_us_etf:
         # 미국ETF 표 출력
