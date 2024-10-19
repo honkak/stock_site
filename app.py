@@ -253,7 +253,7 @@ with st.container():
             border: 1px solid black; 
             padding: 8px; 
             text-align: center;
-            width: 10%;  /* 열의 너비를 10%로 설정하여 고정 */
+            width: 8%;  /* 열의 너비를 10%로 설정하여 고정 */
         }
         .highlight {
             background-color: lightgray;
