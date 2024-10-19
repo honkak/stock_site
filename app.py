@@ -322,16 +322,16 @@ fixed_ratio = st.checkbox("시점고정비율")
 # 수평선 추가
 st.markdown("---")
 
-# 체크박스 그룹
+# 체크박스 그룹 (순서 변경)
 col1, col2, col3, col4 = st.columns(4)
 with col1:
-    show_major_index = st.checkbox("지수", value=False)
+    show_us_etf = st.checkbox("미국ETF", value=True)  # 미국ETF
 with col2:
-    show_major_stocks = st.checkbox("주요종목", value=False)
+    show_kr_etf = st.checkbox("한국ETF", value=False)  # 한국ETF
 with col3:
-    show_us_etf = st.checkbox("미국ETF", value=True)
+    show_major_stocks = st.checkbox("주요종목", value=False)  # 주요종목
 with col4:
-    show_kr_etf = st.checkbox("한국ETF", value=False)
+    show_major_index = st.checkbox("지수", value=False)  # 지수
 
 # 입력된 종목 코드를 리스트로 생성
 codes = [code1, code2, code3]
@@ -436,9 +436,9 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
         html += '</table>'
         st.markdown(html, unsafe_allow_html=True)
 
-    # 주요종목 표 출력
-    if show_major_stocks:
-        html_major_stocks = '''
+    # 한국ETF 표 출력
+    if show_kr_etf:
+        html_kr_etf = '''
         <style>
         table {
             border-collapse: collapse; 
@@ -457,16 +457,16 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
         <table>
         '''
         
-        for i, row in enumerate(data_matrix_top_stocks):
-            html_major_stocks += '<tr>'
+        for i, row in enumerate(data_matrix_kr_etf):
+            html_kr_etf += '<tr>'
             for j, cell in enumerate(row):
                 if i == 0 or j == 1 or j == 3:  # 첫 번째 행과 코드 열 강조
-                    html_major_stocks += f'<td class="highlight">{cell}</td>'
+                    html_kr_etf += f'<td class="highlight">{cell}</td>'
                 else:
-                    html_major_stocks += f'<td>{cell}</td>'
-            html_major_stocks += '</tr>'
-        html_major_stocks += '</table>'
-        st.markdown(html_major_stocks, unsafe_allow_html=True)
+                    html_kr_etf += f'<td>{cell}</td>'
+            html_kr_etf += '</tr>'
+        html_kr_etf += '</table>'
+        st.markdown(html_kr_etf, unsafe_allow_html=True)
 
     # 지수 표 출력
     if show_major_index:
@@ -499,10 +499,10 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
             html_index += '</tr>'
         html_index += '</table>'
         st.markdown(html_index, unsafe_allow_html=True)
-
-    # 한국ETF 표 출력
-    if show_kr_etf:
-        html_kr_etf = '''
+    
+    # 주요종목 표 출력
+    if show_major_stocks:
+        html_major_stocks = '''
         <style>
         table {
             border-collapse: collapse; 
@@ -521,16 +521,16 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
         <table>
         '''
         
-        for i, row in enumerate(data_matrix_kr_etf):
-            html_kr_etf += '<tr>'
+        for i, row in enumerate(data_matrix_top_stocks):
+            html_major_stocks += '<tr>'
             for j, cell in enumerate(row):
                 if i == 0 or j == 1 or j == 3:  # 첫 번째 행과 코드 열 강조
-                    html_kr_etf += f'<td class="highlight">{cell}</td>'
+                    html_major_stocks += f'<td class="highlight">{cell}</td>'
                 else:
-                    html_kr_etf += f'<td>{cell}</td>'
-            html_kr_etf += '</tr>'
-        html_kr_etf += '</table>'
-        st.markdown(html_kr_etf, unsafe_allow_html=True)
+                    html_major_stocks += f'<td>{cell}</td>'
+            html_major_stocks += '</tr>'
+        html_major_stocks += '</table>'
+        st.markdown(html_major_stocks, unsafe_allow_html=True)
         
 if codes and date:
     dataframes = []
