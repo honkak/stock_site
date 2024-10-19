@@ -70,7 +70,7 @@ with st.sidebar:
     table {
         border-collapse: collapse; 
         width: 100%; 
-        font-size: 10px;  /* 글자 크기를 10px로 설정 */
+        font-size: 9px;  /* 글자 크기를 9px로 설정 */
     }
     td {
         border: 1px solid black; 
