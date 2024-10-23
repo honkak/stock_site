@@ -37,6 +37,16 @@ if start_date > end_date:
 # st.write(f"시작일: {start_date}, 종료일: {end_date}")
 
 # 세 개의 종목 코드 입력 필드
+
+st.markdown("""
+    <style>
+    input::placeholder {
+        font-size: 12px; /* 글자 크기 */
+        color: grey; /* 글자 색상 */
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
 col_code1, col_code2, col_code3 = st.columns(3)
 
 with col_code1:
