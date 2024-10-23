@@ -9,8 +9,6 @@ import pandas as pd
 import yfinance as yf
 
 #서비스 제목 입력
-# st.title('다빈치 주식차트 겹치기')
-# st.title('주식 차트비교 서비스')
 st.markdown("<h1 style='font-size: 26px;'>다빈치 주식차트 겹치기</h1>", unsafe_allow_html=True)
 
 # 날짜 입력 (조회 시작일과 종료일을 같은 행에 배치)
@@ -33,11 +31,7 @@ if start_date > end_date:
     st.warning("시작일이 종료일보다 더 늦습니다. 날짜를 자동으로 맞바꿔 반영합니다.")
     start_date, end_date = end_date, start_date  # 날짜를 바꿈
 
-# # 변경된 날짜 표시
-# st.write(f"시작일: {start_date}, 종료일: {end_date}")
-
 # 세 개의 종목 코드 입력 필드
-
 #아래 '종목코드를 입력하세요' 글자 스타일 변경
 st.markdown("""
     <style>
