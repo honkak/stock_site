@@ -39,13 +39,13 @@ if start_date > end_date:
 col_code1, col_code2, col_code3 = st.columns(3)
 
 with col_code1:
-    code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 입력해 주세요. 예시)QQQ')
+    code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 입력해 주세요. - (예시)QQQ')
 
 with col_code2:
-    code2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력해 주세요. 예시)005930')
+    code2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력해 주세요. - (예시)005930')
 
 with col_code3:
-    code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력해 주세요. 예시)AAPL')
+    code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력해 주세요. - (예시)AAPL')
 
 # 종목 코드 리스트
 codes = [code1.strip(), code2.strip(), code3.strip()]
