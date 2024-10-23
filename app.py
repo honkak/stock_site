@@ -94,16 +94,6 @@ with col_name2:
 with col_name3:
     st.markdown(f"<span style='color: black;'>{code3}({stocks_info.get(code3.strip(), '')})</span>", unsafe_allow_html=True)
 
-# 아래 체크박스 스타일 수정
-st.markdown("""
-    <style>
-    div[data-testid="stCheckbox"] label {
-        font-size: 30px;  /* 글자 크기 조정 */
-        color: #4CAF50;   /* 글자 색상 변경 */
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
 # '기준시점 수익률 비교' 체크박스
 fixed_ratio = st.checkbox("기준시점 수익률 비교(Baseline return)")
 
