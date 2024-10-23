@@ -416,13 +416,6 @@ st.markdown("""
 # 초기 투자금 입력 받기
 initial_investment = st.number_input("초기 투자 금액을 입력하세요 (기본 1,000,000원)", value=1000000)
 
-# 종목 코드 입력
-codes = [
-    st.text_input("종목코드 1", ""),
-    st.text_input("종목코드 2", ""),
-    st.text_input("종목코드 3", "")
-]
-
 # 예상 수익 계산을 위한 빈 리스트
 results = []
 
