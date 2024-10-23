@@ -381,8 +381,10 @@ for code in codes:
                 results.append([
                     display_code, 
                     stocks_info.get(code.strip(), '종목명을 찾을 수 없습니다.'), 
-                    return_rate, 
-                    profit_amount
+                    # return_rate, 
+                    # profit_amount
+                    f"{return_rate:.2f}",  # 소수점 두 자리로 포맷팅
+                    f"{profit_amount:,.0f}"  # 천 단위 구분 기호 추가
                 ])
 
         except Exception as e:
