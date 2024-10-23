@@ -41,7 +41,7 @@ if start_date > end_date:
 st.markdown("""
     <style>
     input::placeholder {
-        font-size: 14px; /* 글자 크기 */
+        font-size: 13.5px; /* 글자 크기 */
         color: grey; /* 글자 색상 */
     }
     </style>
