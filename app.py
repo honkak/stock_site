@@ -343,10 +343,8 @@ if codes and start_date and end_date:  # 'date'를 'start_date'와 'end_date'로
             st.table(description_df)
 
 # 조회 시작일 가상 투자금액의 수익률 및 수익금액 계산
-
-# 초기 투자금 입력 (기본값은 100만원)
-# 초기 투자금 입력 (기본값은 100만원)
-initial_investment = st.number_input("초기 투자금(만원)", value=100.0, step=10.0) * 10000  # 원으로 변환
+# 초기 투자금 입력 (기본값은 100만원, 원 단위)
+initial_investment = st.number_input("초기 투자금(원)", value=1000000, step=100000)  # 기본값을 100만원으로 설정
 
 # 수익률 및 수익금액 계산
 results = []
