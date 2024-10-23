@@ -346,6 +346,9 @@ if codes and start_date and end_date:  # 'date'를 'start_date'와 'end_date'로
 # 초기 투자금 입력 (기본값은 100만원, 원 단위)
 initial_investment = st.number_input("초기 투자금(원)", value=1000000, step=100000)
 
+# 포맷팅된 초기 투자금 표시
+st.write(f"초기 투자금: {initial_investment:,.0f} 원")  # 천 단위 구분 기호 추가
+
 # 수익률 및 수익금액 계산
 results = []
 
