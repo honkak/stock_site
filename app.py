@@ -82,8 +82,8 @@ with col_name2:
 with col_name3:
     st.markdown(f"<span style='color: black;'>{code3}({stocks_info.get(code3.strip(), '')})</span>", unsafe_allow_html=True)
 
-# '시점고정비율' 체크박스
-fixed_ratio = st.checkbox("시점고정비율")
+# '기준 시점 수익률 비교' 체크박스
+fixed_ratio = st.checkbox("기준 시점 수익률 비교(Baseline return)")
 
 # 수평선 추가
 st.markdown("---")
