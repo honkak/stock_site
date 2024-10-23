@@ -9,7 +9,7 @@ import pandas as pd
 import yfinance as yf
 
 #서비스 제목 입력
-st.title('마인부우 주식차트 겹치기')
+st.title('다빈치 주식차트 겹치기')
 # st.title('주식 차트비교 서비스')
 
 # 날짜 입력 (조회 시작일과 종료일을 같은 행에 배치)
