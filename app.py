@@ -345,7 +345,8 @@ if codes and start_date and end_date:  # 'date'를 'start_date'와 'end_date'로
 # 조회 시작일 가상 투자금액의 수익률 및 수익금액 계산
 
 # 초기 투자금 입력 (기본값은 100만원)
-initial_investment = st.number_input("초기 투자금(만원)", value=100.0, step=10.0)
+# 초기 투자금 입력 (기본값은 100만원)
+initial_investment = st.number_input("초기 투자금(만원)", value=100.0, step=10.0) * 10000  # 원으로 변환
 
 # 수익률 및 수익금액 계산
 results = []
@@ -382,9 +383,12 @@ for code in codes:
                     profit_amount_formatted  # 포맷팅된 수익금액 추가
                 ])  # 종목명 추가
 
+            else:
+                st.error(f"{code}의 데이터가 비어 있습니다.")  # 데이터가 비어 있을 경우 메시지 출력
+
         except Exception as e:
             st.error(f"{code}의 데이터를 가져오는 데 오류가 발생했습니다: {e}")
-
+            
 # for code in codes:
 #     if code:
 #         try:
