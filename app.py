@@ -98,7 +98,7 @@ with col_name3:
 st.markdown("""
     <style>
     div[data-testid="stCheckbox"] label {
-        font-size: 18px;  /* 글자 크기 조정 */
+        font-size: 30px;  /* 글자 크기 조정 */
         color: #4CAF50;   /* 글자 색상 변경 */
     }
     </style>
