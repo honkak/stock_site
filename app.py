@@ -57,7 +57,7 @@ with col_code3:
 codes = [code1.strip(), code2.strip(), code3.strip()]
 
 # 지수 코드 리스트 (필요에 따라 확장 가능)
-index_codes = ['KS11', 'DJI', 'JP225', 'KQ11', 'IXIC', 'STOXX50E', 'KS50', 'US500', 'CSI300', 'KS100', 'S&P500', 'VIX', 'KOSPI100', 'HSI', 'KRX100', 'FTSE', 'KS200', 'DAX', 'CAC', 'GSPC'] # 대표적인 지수들 예시
+index_codes = ['KS11', 'DJI', 'JP225', 'KQ11', 'IXIC', 'STOXX50E', 'KS50', 'GSPC', 'CSI300', 'KS100', 'S&P500', 'VIX', 'KOSPI100', 'HSI', 'KRX100', 'FTSE', 'KS200', 'DAX', 'CAC', 'GSPC'] # 대표적인 지수들 예시
 
 # 종목 정보 가져오기
 stocks_info = {}
