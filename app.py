@@ -348,8 +348,7 @@ if codes and start_date and end_date:  # 'date'를 'start_date'와 'end_date'로
             description_df = pd.DataFrame(column_description)
             st.table(description_df)
 
-#방문객 수 및 추적
-
+#방문객 수 및 추적(구글 아날리스틱으로 데이터 보내기)
 st.markdown("""
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5SSHBVL0TW"></script>
     <script>
