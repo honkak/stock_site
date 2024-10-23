@@ -343,35 +343,43 @@ if codes and start_date and end_date:  # 'date'를 'start_date'와 'end_date'로
             st.table(description_df)
 
 # 조회 시작일에 100만원을 넣었을 때 수익률 및 수익금액 계산
-if fixed_ratio:
-    results = []
-    initial_investment = 1000000  # 초기 투자금 100만원
+# 초기 투자금 입력 (기본값은 100만원)
+initial_investment = st.number_input("초기 투자금(만원)", value=100.0, step=10.0)
 
-    for code in codes:
-        if code:
-            try:
-                # 종목의 시작가와 종가 조회
-                data = yf.download(code, start=start_date, end=end_date)
-                if not data.empty:
-                    starting_price = data['Close'].iloc[0]  # 시작가
-                    ending_price = data['Close'].iloc[-1]   # 종가
-                    
-                    # 수익률 및 수익금액 계산
-                    return_rate = (ending_price - starting_price) / starting_price * 100
-                    profit_amount = initial_investment * (ending_price / starting_price - 1)
-                    
-                    results.append([code, stocks_info.get(code.strip(), '이름을 찾을 수 없습니다.'), return_rate, profit_amount])  # 종목명 추가
+# 수익률 및 수익금액 계산
+results = []
+for code in codes:
+    if code:
+        try:
+            stock_data = yf.download(code, start=start_date, end=end_date)
+            if not stock_data.empty:
+                # 첫 번째 및 마지막 종가 추출
+                initial_price = stock_data['Close'].iloc[0]
+                final_price = stock_data['Close'].iloc[-1]
 
-            except Exception as e:
-                st.error(f"{code}의 데이터를 가져오는 데 오류가 발생했습니다: {e}")
+                # 수익률 및 수익금액 계산
+                return_rate = ((final_price - initial_price) / initial_price) * 100
+                profit = initial_investment * 10000 * (return_rate / 100)  # 원으로 환산
 
-    # 결과 데이터프레임 생성
-    results_df = pd.DataFrame(results, columns=['종목코드', '종목명', '수익률 (%)', '수익금액 (원)'])
+                # 결과 저장 (종목 코드, 종목명, 수익률, 수익금액)
+                results.append({
+                    '종목코드': code,
+                    '종목명': stocks_info.get(code, '이름을 찾을 수 없습니다.'),
+                    '수익률': f"{return_rate:.2f}%",
+                    '수익금액': f"{int(profit):,}"
+                })
+        except Exception as e:
+            st.warning(f"{code}의 데이터를 가져오는 데 문제가 발생했습니다.")
 
-    # 결과 출력
-    st.write("조회 종료일 기준 수익")
-    st.dataframe(results_df)
+# 결과를 데이터프레임으로 변환
+results_df = pd.DataFrame(results)
 
+# 표 표시
+if not results_df.empty:
+    st.write("### 수익률 및 수익금액")
+    st.dataframe(results_df, use_container_width=True)
+else:
+    st.warning("수익률 및 수익금액을 계산할 수 없습니다.")
 
 #방문객 수 및 추적(구글 아날리스틱으로 데이터 보내기)
 st.markdown("""
