@@ -83,7 +83,7 @@ with col_name3:
     st.markdown(f"<span style='color: black;'>{code3}({stocks_info.get(code3.strip(), '')})</span>", unsafe_allow_html=True)
 
 # '기준 시점 수익률 비교' 체크박스
-fixed_ratio = st.checkbox("기준 시점 수익률 비교(Baseline return)")
+fixed_ratio = st.checkbox("기준시점 수익률 비교(Baseline return)")
 
 # 수평선 추가
 st.markdown("---")
@@ -323,7 +323,7 @@ if codes and start_date and end_date:  # 'date'를 'start_date'와 'end_date'로
         with tab1:
             st.line_chart(combined_data, use_container_width=True)
             if fixed_ratio:
-                st.write("Y축은 비율로 표시되며, 기준 시점 0% 에서 시작합니다.")
+                st.write("Y축은 비율로 표시되며, 기준시점 0% 에서 시작합니다.")
     
         with tab2:
             st.dataframe(pd.concat([fdr.DataReader(code, start_date, end_date) for code in codes], keys=codes))
