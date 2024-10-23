@@ -357,30 +357,73 @@ for code in codes:
         try:
             # 한국 종목 코드에 .KS 추가, 지수는 ^ 추가
             if code.isdigit() and len(code) == 6:  # 한국 종목 코드
-                code = f"{code}.KS"
-            elif code in index_codes:  # 지수 목록에 있는 경우에는 ^ 추가
-                code = f"^{code}"
+                yf_code = f"{code}.KS"  # yf에서 사용할 코드
+                display_code = code  # 표에 표시할 코드
+            elif code in index_codes:  # 지수 목록에 있는 경우
+                yf_code = f"^{code}"  # yf에서 사용할 코드
+                display_code = code  # 표에 표시할 코드
+            else:
+                yf_code = code  # 미국 종목 코드
+                display_code = code  # 표에 표시할 코드
+            
             # 종목의 시작가와 종가 조회
-            data = yf.download(code, start=start_date, end=end_date)
+            data = yf.download(yf_code, start=start_date, end=end_date)
             if not data.empty:
                 starting_price = data['Close'].iloc[0]  # 시작가
                 ending_price = data['Close'].iloc[-1]   # 종가
-
+                
                 # 수익률 및 수익금액 계산
                 return_rate = (ending_price - starting_price) / starting_price * 100
                 profit_amount = initial_investment * (ending_price / starting_price - 1)
-                results.append([code, stocks_info.get(code.strip(), '종목명을 찾을 수 없습니다.'), 
-                return_rate, 
-                profit_amount])  # 종목명 추가
+
+                # return_rate 소수점 두 자리로 포맷팅
+                return_rate_formatted = f"{return_rate:.2f}"
+                
+                # profit_amount 천 단위 구분 기호로 포맷팅 (소수점 없이)
+                profit_amount_formatted = f"{profit_amount:,.0f} 원"  # 소수점 없이 원 단위로 표시
+                
                 results.append([
-                    code, 
+                    display_code,  # 표시할 코드 (KS 및 ^ 제거)
                     stocks_info.get(code.strip(), '종목명을 찾을 수 없습니다.'), 
-                    return_rate, 
-                    profit_amount
-                ])
+                    return_rate_formatted,  # 포맷팅된 수익률 추가
+                    profit_amount_formatted  # 포맷팅된 수익금액 추가
+                ])  # 종목명 추가
+
+            else:
+                st.error(f"{code}의 데이터가 비어 있습니다.")  # 데이터가 비어 있을 경우 메시지 출력
 
         except Exception as e:
             st.error(f"{code}의 데이터를 가져오는 데 오류가 발생했습니다: {e}")
+
+# for code in codes:
+#     if code:
+#         try:
+#             # 한국 종목 코드에 .KS 추가, 지수는 ^ 추가
+#             if code.isdigit() and len(code) == 6:  # 한국 종목 코드
+#                 code = f"{code}.KS"
+#             elif code in index_codes:  # 지수 목록에 있는 경우에는 ^ 추가
+#                 code = f"^{code}"
+#             # 종목의 시작가와 종가 조회
+#             data = yf.download(code, start=start_date, end=end_date)
+#             if not data.empty:
+#                 starting_price = data['Close'].iloc[0]  # 시작가
+#                 ending_price = data['Close'].iloc[-1]   # 종가
+
+#                 # 수익률 및 수익금액 계산
+#                 return_rate = (ending_price - starting_price) / starting_price * 100
+#                 profit_amount = initial_investment * (ending_price / starting_price - 1)
+#                 results.append([code, stocks_info.get(code.strip(), '종목명을 찾을 수 없습니다.'), 
+#                 return_rate, 
+#                 profit_amount])  # 종목명 추가
+#                 results.append([
+#                     code, 
+#                     stocks_info.get(code.strip(), '종목명을 찾을 수 없습니다.'), 
+#                     return_rate, 
+#                     profit_amount
+#                 ])
+
+#         except Exception as e:
+#             st.error(f"{code}의 데이터를 가져오는 데 오류가 발생했습니다: {e}")
             
 
 # 결과 데이터프레임 생성
