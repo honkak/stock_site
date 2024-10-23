@@ -11,7 +11,7 @@ import yfinance as yf
 #서비스 제목 입력
 # st.title('다빈치 주식차트 겹치기')
 # st.title('주식 차트비교 서비스')
-st.markdown("<h1 style='font-size: 24px;'>다빈치 주식차트 겹치기</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='font-size: 30px;'>다빈치 주식차트 겹치기</h1>", unsafe_allow_html=True)
 
 # 날짜 입력 (조회 시작일과 종료일을 같은 행에 배치)
 col_start_date, col_end_date = st.columns(2)
