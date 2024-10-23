@@ -32,8 +32,8 @@ if start_date > end_date:
     st.warning("시작일이 종료일보다 더 늦습니다. 날짜를 자동으로 맞바꿔 반영합니다.")
     start_date, end_date = end_date, start_date  # 날짜를 바꿈
 
-# 변경된 날짜 표시
-st.write(f"시작일: {start_date}, 종료일: {end_date}")
+# # 변경된 날짜 표시
+# st.write(f"시작일: {start_date}, 종료일: {end_date}")
 
 # 세 개의 종목 코드 입력 필드
 col_code1, col_code2, col_code3 = st.columns(3)
