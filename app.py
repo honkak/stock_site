@@ -362,7 +362,11 @@ for code in codes:
                 # 수익률 및 수익금액 계산
                 return_rate = (ending_price - starting_price) / starting_price * 100
                 profit_amount = initial_investment * (ending_price / starting_price - 1)
-                results.append([code, stocks_info.get(code.strip(), '종목명을 찾을 수 없습니다.'), return_rate, profit_amount])  # 종목명 추가
+                results.append([code, stocks_info.get(code.strip(), '종목명을 찾을 수 없습니다.'), 
+                f"{return_rate:.2f}%",  # 수익률 포맷
+                f"{int(profit_amount):,}"  # 수익금액 천 단위 구분
+                # return_rate, 
+                # profit_amount])  # 종목명 추가
 
         except Exception as e:
             st.error(f"{code}의 데이터를 가져오는 데 오류가 발생했습니다: {e}")
