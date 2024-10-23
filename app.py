@@ -411,3 +411,55 @@ st.markdown("""
     gtag('config', 'G-5SSHBVL0TW');
     </script>
 """, unsafe_allow_html=True)
+
+
+# 초기 투자금 입력 받기
+initial_investment = st.number_input("초기 투자 금액을 입력하세요 (기본 1,000,000원)", value=1000000)
+
+# 종목 코드 입력
+codes = [
+    st.text_input("종목코드 1", ""),
+    st.text_input("종목코드 2", ""),
+    st.text_input("종목코드 3", "")
+]
+
+# 예상 수익 계산을 위한 빈 리스트
+results = []
+
+# 각 종목 코드에 대해 수익률 계산
+for code in codes:
+    if code:
+        try:
+            # 종가 데이터 가져오기
+            stock_data = yf.download(f"{code}.KS" if code.isdigit() else code, start=start_date, end=end_date)
+            if not stock_data.empty:
+                # 수익률 계산
+                start_price = stock_data['Close'][0]  # 시작일 종가
+                end_price = stock_data['Close'][-1]  # 종료일 종가
+                return_rate = ((end_price - start_price) / start_price) * 100  # 백분율 수익률
+                profit_amount = initial_investment * (return_rate / 100)  # 수익 금액
+
+                # 결과 리스트에 추가
+                results.append({
+                    '종목코드': code,
+                    '종목명': stocks_info.get(code.strip(), '이름을 찾을 수 없습니다.'),
+                    '수익률': f"{return_rate:.2f}%",  # 소수점 두 자리로 포맷
+                    '수익금액': f"{int(profit_amount):,} 원"  # 천 단위 구분 기호
+                })
+        except Exception as e:
+            results.append({
+                '종목코드': code,
+                '종목명': '정보를 가져올 수 없습니다.',
+                '수익률': '-',
+                '수익금액': '-'
+            })
+
+# 결과를 데이터프레임으로 변환
+results_df = pd.DataFrame(results)
+
+# 결과 표시
+if not results_df.empty:
+    st.subheader("예상 수익")
+    st.write(results_df)
+else:
+    st.write("결과가 없습니다.")
