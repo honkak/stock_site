@@ -362,10 +362,10 @@ if "analytics" not in st.experimental_get_query_params():
 
 # 사용자 추적, 결과는 항상 표시되고, 비밀번호는 'qqqq'로 설정
 with streamlit_analytics.track(unsafe_password="qqqq"):
-    st.title("My Streamlit App with Analytics")
-
+    st.subheader("다빈치 차트 App with Analytics")
+    
     # 사용자 상호작용을 추적할 수 있는 위젯들
-    st.text_input("Write something")
+    # st.text_input("Write something")
     # st.button("Click me")
     # st.slider("Choose a number", 0, 100)
     # st.checkbox("Agree to terms")
