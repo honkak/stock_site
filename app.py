@@ -356,6 +356,10 @@ st.markdown("""
     </script>
 """, unsafe_allow_html=True)
 
+# URL에 항상 ?analytics=on을 추가하기 위한 설정
+if "analytics" not in st.experimental_get_query_params():
+    st.experimental_set_query_params(analytics="on")
+
 # 사용자 추적, 결과는 항상 표시되고, 비밀번호는 'qqqq'로 설정
 with streamlit_analytics.track(unsafe_password="qqqq"):
     st.title("My Streamlit App with Analytics")
