@@ -7,6 +7,7 @@ import FinanceDataReader as fdr
 import datetime
 import pandas as pd
 import yfinance as yf
+import streamlit_analytics
 
 #서비스 제목 입력
 st.markdown("<h1 style='font-size: 26px;'>다빈치 주식차트 겹치기</h1>", unsafe_allow_html=True)
@@ -354,3 +355,13 @@ st.markdown("""
     gtag('config', 'G-5SSHBVL0TW');
     </script>
 """, unsafe_allow_html=True)
+
+# 사용자 추적, 결과는 항상 표시되고, 비밀번호는 'qqqq'로 설정
+with streamlit_analytics.track(unsafe_password="qqqq"):
+    st.title("My Streamlit App with Analytics")
+
+    # 사용자 상호작용을 추적할 수 있는 위젯들
+    st.text_input("Write something")
+    st.button("Click me")
+    st.slider("Choose a number", 0, 100)
+    st.checkbox("Agree to terms")
