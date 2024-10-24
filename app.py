@@ -7,7 +7,7 @@ import FinanceDataReader as fdr
 import datetime
 import pandas as pd
 import yfinance as yf
-import streamlit_analytics
+# import streamlit_analytics
 
 #서비스 제목 입력
 st.markdown("<h1 style='font-size: 26px;'>다빈치 주식차트 겹치기</h1>", unsafe_allow_html=True)
@@ -359,23 +359,23 @@ st.markdown("""
 # 수평선 추가
 st.markdown("---")
 
-# URL에 항상 ?analytics=on을 추가하기 위한 설정
-if "analytics" not in st.experimental_get_query_params():
-    st.experimental_set_query_params(analytics="on")
+# # URL에 항상 ?analytics=on을 추가하기 위한 설정
+# if "analytics" not in st.experimental_get_query_params():
+#     st.experimental_set_query_params(analytics="on")
 
-# 사용자 추적, 결과는 항상 표시되고, 비밀번호는 'qqqq'로 설정
-with streamlit_analytics.track(unsafe_password="qqqq"):
-    st.subheader("다빈치 차트 App with Analytics")
+# # 사용자 추적, 결과는 항상 표시되고, 비밀번호는 'qqqq'로 설정
+# with streamlit_analytics.track(unsafe_password="qqqq"):
+#     st.subheader("다빈치 차트 App with Analytics")
     
-    # Analytics Dashboard에 대한 기본 문구 스타일을 변경해 눈에 덜 띄게
-    st.markdown("""
-        <style>
-        div[data-testid="stMarkdownContainer"] p {
-            font-size: 10px;
-            color: lightgray;
-        }
-        </style>
-    """, unsafe_allow_html=True)
+#     # Analytics Dashboard에 대한 기본 문구 스타일을 변경해 눈에 덜 띄게
+#     st.markdown("""
+#         <style>
+#         div[data-testid="stMarkdownContainer"] p {
+#             font-size: 10px;
+#             color: lightgray;
+#         }
+#         </style>
+#     """, unsafe_allow_html=True)
     
     # 사용자 상호작용을 추적할 수 있는 위젯들
     # st.text_input("Write something")
