@@ -356,16 +356,12 @@ st.markdown("""
     </script>
 """, unsafe_allow_html=True)
 
-# 수평선 추가
-st.markdown("---")
-
 # URL에 항상 ?analytics=on을 추가하기 위한 설정
 if "analytics" not in st.experimental_get_query_params():
     st.experimental_set_query_params(analytics="on")
 
 # 사용자 추적, 결과는 항상 표시되고, 비밀번호는 'qqqq'로 설정
 with streamlit_analytics.track(unsafe_password="qqqq"):
-    # st.subheader("App Analytics")
     
     # Analytics Dashboard 글자 크기 조정 및 설명 텍스트 숨기기
     st.markdown("""
@@ -382,8 +378,3 @@ with streamlit_analytics.track(unsafe_password="qqqq"):
         </style>
     """, unsafe_allow_html=True)
     
-    # 사용자 상호작용을 추적할 수 있는 위젯들
-    # st.text_input("Write something")
-    # st.button("Click me")
-    # st.slider("Choose a number", 0, 100)
-    # st.checkbox("Agree to terms")
