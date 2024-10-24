@@ -365,14 +365,19 @@ if "analytics" not in st.experimental_get_query_params():
 
 # 사용자 추적, 결과는 항상 표시되고, 비밀번호는 'qqqq'로 설정
 with streamlit_analytics.track(unsafe_password="qqqq"):
-    st.subheader("다빈치 차트 App with Analytics")
+    st.subheader("App Analytics")
     
-    # Analytics Dashboard에 대한 기본 문구 스타일을 변경해 눈에 덜 띄게
+    # Analytics Dashboard 글자 크기 조정 및 설명 텍스트 숨기기
     st.markdown("""
         <style>
+        /* Analytics Dashboard 크기 조정 */
+        div[data-testid="stMarkdownContainer"] h1 {
+            font-size: 18px !important;
+            text-align: center;
+        }
+        /* 설명 텍스트 숨기기 */
         div[data-testid="stMarkdownContainer"] p {
-            font-size: 10px;
-            color: lightgray;
+            display: none;
         }
         </style>
     """, unsafe_allow_html=True)
