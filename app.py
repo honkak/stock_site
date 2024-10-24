@@ -356,29 +356,29 @@ st.markdown("""
     </script>
 """, unsafe_allow_html=True)
 
-# URL에 항상 ?analytics=on을 추가하기 위한 설정
-if "analytics" not in st.experimental_get_query_params():
-    st.experimental_set_query_params(analytics="on")
+# # URL에 항상 ?analytics=on을 추가하기 위한 설정
+# if "analytics" not in st.experimental_get_query_params():
+#     st.experimental_set_query_params(analytics="on")
 
-# 사용자 추적, 결과는 항상 표시되고, 비밀번호는 'qqqq'로 설정
-with streamlit_analytics.track(
-    unsafe_password="qqqq",
-    firestore_key_file="stock-site-b2065-firebase-adminsdk-mqxsy-078031f7a0.json",  # Firestore 인증 키 파일
-    firestore_collection_name="stock_site"  # 데이터 저장할 컬렉션 이름
-):
+# # 사용자 추적, 결과는 항상 표시되고, 비밀번호는 'qqqq'로 설정
+# with streamlit_analytics.track(
+#     unsafe_password="qqqq",
+#     firestore_key_file="stock-site-b2065-firebase-adminsdk-mqxsy-078031f7a0.json",  # Firestore 인증 키 파일
+#     firestore_collection_name="stock_site"  # 데이터 저장할 컬렉션 이름
+# ):
     
-    # Analytics Dashboard 글자 크기 조정 및 설명 텍스트 숨기기
-    st.markdown("""
-        <style>
-        /* Analytics Dashboard 크기 조정 */
-        div[data-testid="stMarkdownContainer"] h1 {
-            font-size: 18px !important;
-            text-align: center;
-        }
-        # /* 분석 대시보드의 특정 설명 텍스트 숨기기 */
-        # div[data-testid="stMarkdownContainer"] div:nth-of-type(2) {
-        #     display: none; /* 분석 대시보드의 두 번째 div 숨기기 (구조에 따라 다를 수 있음) */
-        # }
-        </style>
-    """, unsafe_allow_html=True)
+#     # Analytics Dashboard 글자 크기 조정 및 설명 텍스트 숨기기
+#     st.markdown("""
+#         <style>
+#         /* Analytics Dashboard 크기 조정 */
+#         div[data-testid="stMarkdownContainer"] h1 {
+#             font-size: 18px !important;
+#             text-align: center;
+#         }
+#         # /* 분석 대시보드의 특정 설명 텍스트 숨기기 */
+#         # div[data-testid="stMarkdownContainer"] div:nth-of-type(2) {
+#         #     display: none; /* 분석 대시보드의 두 번째 div 숨기기 (구조에 따라 다를 수 있음) */
+#         # }
+#         </style>
+#     """, unsafe_allow_html=True)
     
