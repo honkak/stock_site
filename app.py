@@ -386,10 +386,6 @@ with streamlit_analytics.track(
         font-size: 18px !important;
         text-align: center;
     }
-    /* "Psst!" 메시지 숨기기 */
-    div[data-testid="stMarkdownContainer"] div:nth-child(2) {
-        color: lightgray;
-    }
     </style>
 """, unsafe_allow_html=True)
 
