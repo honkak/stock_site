@@ -365,7 +365,7 @@ if "analytics" not in st.experimental_get_query_params():
 
 # 사용자 추적, 결과는 항상 표시되고, 비밀번호는 'qqqq'로 설정
 with streamlit_analytics.track(unsafe_password="qqqq"):
-    st.subheader("App Analytics")
+    # st.subheader("App Analytics")
     
     # Analytics Dashboard 글자 크기 조정 및 설명 텍스트 숨기기
     st.markdown("""
