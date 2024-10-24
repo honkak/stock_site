@@ -356,29 +356,29 @@ st.markdown("""
     </script>
 """, unsafe_allow_html=True)
 
-# # URL에 항상 ?analytics=on을 추가하기 위한 설정
-# if "analytics" not in st.experimental_get_query_params():
-#     st.experimental_set_query_params(analytics="on")
+# 수평선 추가
+st.markdown("---")
 
-# # 사용자 추적, 결과는 항상 표시되고, 비밀번호는 'qqqq'로 설정
-# with streamlit_analytics.track(
-#     unsafe_password="qqqq",
-#     firestore_key_file="stock-site-b2065-firebase-adminsdk-mqxsy-078031f7a0.json",  # Firestore 인증 키 파일
-#     firestore_collection_name="stock_site"  # 데이터 저장할 컬렉션 이름
-# ):
+# URL에 항상 ?analytics=on을 추가하기 위한 설정
+if "analytics" not in st.experimental_get_query_params():
+    st.experimental_set_query_params(analytics="on")
+
+# 사용자 추적, 결과는 항상 표시되고, 비밀번호는 'qqqq'로 설정
+with streamlit_analytics.track(unsafe_password="qqqq"):
+    st.subheader("다빈치 차트 App with Analytics")
     
-#     # Analytics Dashboard 글자 크기 조정 및 설명 텍스트 숨기기
-#     st.markdown("""
-#         <style>
-#         /* Analytics Dashboard 크기 조정 */
-#         div[data-testid="stMarkdownContainer"] h1 {
-#             font-size: 18px !important;
-#             text-align: center;
-#         }
-#         # /* 분석 대시보드의 특정 설명 텍스트 숨기기 */
-#         # div[data-testid="stMarkdownContainer"] div:nth-of-type(2) {
-#         #     display: none; /* 분석 대시보드의 두 번째 div 숨기기 (구조에 따라 다를 수 있음) */
-#         # }
-#         </style>
-#     """, unsafe_allow_html=True)
+    # Analytics Dashboard에 대한 기본 문구 스타일을 변경해 눈에 덜 띄게
+    st.markdown("""
+        <style>
+        div[data-testid="stMarkdownContainer"] p {
+            font-size: 10px;
+            color: lightgray;
+        }
+        </style>
+    """, unsafe_allow_html=True)
     
+    # 사용자 상호작용을 추적할 수 있는 위젯들
+    # st.text_input("Write something")
+    # st.button("Click me")
+    # st.slider("Choose a number", 0, 100)
+    # st.checkbox("Agree to terms")
