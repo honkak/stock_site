@@ -386,10 +386,6 @@ with streamlit_analytics.track(
         font-size: 18px !important;
         text-align: center;
     }
-    /* 분석 대시보드의 특정 설명 텍스트 숨기기 */
-    div[data-testid="stMarkdownContainer"] p {
-        display: none;
-    }
     /* "Psst!" 메시지 숨기기 */
     div[data-testid="stMarkdownContainer"] div:nth-child(2) {
         display: none;
