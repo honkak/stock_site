@@ -367,6 +367,16 @@ if "analytics" not in st.experimental_get_query_params():
 with streamlit_analytics.track(unsafe_password="qqqq"):
     st.subheader("다빈치 차트 App with Analytics")
     
+    # Analytics Dashboard에 대한 기본 문구 스타일을 변경해 눈에 덜 띄게
+    st.markdown("""
+        <style>
+        div[data-testid="stMarkdownContainer"] p {
+            font-size: 10px;
+            color: transparent;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+    
     # 사용자 상호작용을 추적할 수 있는 위젯들
     # st.text_input("Write something")
     # st.button("Click me")
