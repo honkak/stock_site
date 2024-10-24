@@ -356,13 +356,16 @@ st.markdown("""
     </script>
 """, unsafe_allow_html=True)
 
+# 수평선 추가
+st.markdown("---")
+
 # URL에 항상 ?analytics=on을 추가하기 위한 설정
 if "analytics" not in st.experimental_get_query_params():
     st.experimental_set_query_params(analytics="on")
 
 # 사용자 추적, 결과는 항상 표시되고, 비밀번호는 'qqqq'로 설정
 with streamlit_analytics.track(unsafe_password="qqqq"):
-    # st.subheader("다빈치 차트 App with Analytics")
+    st.subheader("다빈치 차트 App with Analytics")
     
     # 사용자 상호작용을 추적할 수 있는 위젯들
     # st.text_input("Write something")
