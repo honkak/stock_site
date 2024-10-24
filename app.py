@@ -372,7 +372,7 @@ with streamlit_analytics.track(unsafe_password="qqqq"):
         <style>
         div[data-testid="stMarkdownContainer"] p {
             font-size: 10px;
-            color: transparent;
+            color: lightgray;
         }
         </style>
     """, unsafe_allow_html=True)
