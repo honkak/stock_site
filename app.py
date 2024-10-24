@@ -366,6 +366,6 @@ with streamlit_analytics.track(unsafe_password="qqqq"):
 
     # 사용자 상호작용을 추적할 수 있는 위젯들
     st.text_input("Write something")
-    st.button("Click me")
-    st.slider("Choose a number", 0, 100)
-    st.checkbox("Agree to terms")
+    # st.button("Click me")
+    # st.slider("Choose a number", 0, 100)
+    # st.checkbox("Agree to terms")
