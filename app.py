@@ -388,7 +388,7 @@ with streamlit_analytics.track(
     }
     /* "Psst!" 메시지 숨기기 */
     div[data-testid="stMarkdownContainer"] div:nth-child(2) {
-        display: none;
+        color: lightgray;
     }
     </style>
 """, unsafe_allow_html=True)
