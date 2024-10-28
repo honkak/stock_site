@@ -54,6 +54,9 @@ with col_code2:
 with col_code3:
     code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력하세요 - (예시)AAPL')
 
+# 세 입력 필드가 모두 입력된 후에 트래킹 코드가 작동
+streamlit_analytics.track()
+
 # 종목 코드 리스트
 codes = [code1.strip(), code2.strip(), code3.strip()]
 
