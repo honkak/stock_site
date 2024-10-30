@@ -400,6 +400,6 @@ with streamlit_analytics.track(
 
 # 페이지 헤더에 메타 태그 삽입 (소유권 확인용)
 meta_tag = """
-<meta name="google-site-verification" content="ca-pub-9731947717883225" />
+<meta name="google-adsense-account" content="ca-pub-9731947717883225">
 """
 components.html(meta_tag)
