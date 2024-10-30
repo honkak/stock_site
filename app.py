@@ -398,4 +398,8 @@ with streamlit_analytics.track(
     </style>
 """, unsafe_allow_html=True)
 
-
+# 페이지 헤더에 메타 태그 삽입 (구글 애드센스 소유권 확인용)
+meta_tag = """
+<meta name="google-adsense-account" content="ca-pub-9731947717883225">
+"""
+components.html(meta_tag)
