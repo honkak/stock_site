@@ -45,17 +45,25 @@ st.markdown("""
 
 col_code1, col_code2, col_code3 = st.columns(3)
 
-with col_code1:
-    code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 입력하세요 - (예시)QQQ')
-    streamlit_analytics.track()
+# 페이지 전체에서의 상호작용을 트래킹
+with streamlit_analytics.track():
+    with col_code1:
+        code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 입력하세요 - (예시)QQQ')
 
-with col_code2:
-    code2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력하세요 - (예시)005930')
-    streamlit_analytics.track()
+    with col_code2:
+        code2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력하세요 - (예시)005930')
 
-with col_code3:
-    code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력하세요 - (예시)AAPL')
-    streamlit_analytics.track()
+    with col_code3:
+        code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력하세요 - (예시)AAPL')
+
+# with col_code1:
+#     code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 입력하세요 - (예시)QQQ')
+
+# with col_code2:
+#     code2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력하세요 - (예시)005930')
+
+# with col_code3:
+#     code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력하세요 - (예시)AAPL')
 
 # # 세 입력 필드가 모두 입력된 후에 트래킹 코드가 작동
 # streamlit_analytics.track()
