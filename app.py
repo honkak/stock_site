@@ -7,21 +7,20 @@ import FinanceDataReader as fdr
 import datetime
 import pandas as pd
 import yfinance as yf
-import streamlit_analytics import track
-track()
+import streamlit_analytics 
 
-#방문객 수 및 추적(구글 아날리스틱으로 데이터 보내기)
-st.markdown("""
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5SSHBVL0TW"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    window.onload = function() {
-        gtag('js', new Date());
-        gtag('config', 'G-5SSHBVL0TW');
-    }
-    </script>
-""", unsafe_allow_html=True)
+# #방문객 수 및 추적(구글 아날리스틱으로 데이터 보내기)
+# st.markdown("""
+#     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5SSHBVL0TW"></script>
+#     <script>
+#     window.dataLayer = window.dataLayer || [];
+#     function gtag(){dataLayer.push(arguments);}
+#     window.onload = function() {
+#         gtag('js', new Date());
+#         gtag('config', 'G-5SSHBVL0TW');
+#     }
+#     </script>
+# """, unsafe_allow_html=True)
 
 #서비스 제목 입력
 st.markdown("<h1 style='font-size: 26px;'>다빈치 주식차트 겹치기</h1>", unsafe_allow_html=True)
