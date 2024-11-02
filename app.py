@@ -7,7 +7,8 @@ import FinanceDataReader as fdr
 import datetime
 import pandas as pd
 import yfinance as yf
-import streamlit_analytics
+import streamlit_analytics import track
+track()
 
 #방문객 수 및 추적(구글 아날리스틱으로 데이터 보내기)
 st.markdown("""
