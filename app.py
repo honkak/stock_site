@@ -7,7 +7,8 @@ import FinanceDataReader as fdr
 import datetime
 import pandas as pd
 import yfinance as yf
-import streamlit_analytics 
+import streamlit_analytics
+import streamlit.components.v1 as components
 
 # #방문객 수 및 추적(구글 아날리스틱으로 데이터 보내기)
 # st.markdown("""
@@ -21,6 +22,22 @@ import streamlit_analytics
 #     }
 #     </script>
 # """, unsafe_allow_html=True)
+
+# HTML with the meta tag for Google AdSense
+meta_html = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="google-adsense-account" content="ca-pub-9731947717883225">
+</head>
+<body>
+    <!-- Additional content if needed -->
+</body>
+</html>
+"""
+
+# Render the HTML in Streamlit
+components.html(meta_html, height=100)
 
 #서비스 제목 입력
 st.markdown("<h1 style='font-size: 26px;'>다빈치 주식차트 겹치기</h1>", unsafe_allow_html=True)
