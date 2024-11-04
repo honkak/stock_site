@@ -364,7 +364,7 @@ with streamlit_analytics.track(unsafe_password="qqqq"):
         text-align: center;
     }
     /* 설명 텍스트 숨기기 */
-    div[data-testid="stMarkdownContainer"] p {
+    div[data-testid="stMarkdownContainer"] p:nth-of-type(2) {
         display: none;
     }
     </style>
