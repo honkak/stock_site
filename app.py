@@ -374,7 +374,7 @@ if codes and start_date and end_date:
             profit_amount = (return_percentage / 100) * initial_investment
             total_amount = initial_investment + profit_amount
             
-            profit_info.append(f"종목 {code} 현재 총 {total_amount:,.0f} 원입니다. (수익률: {return_percentage:.2f}%)")
+            profit_info.append(f"종목 {code} 현재 {total_amount:,.0f} 원이 되었습니다. (수익률: {return_percentage:.2f}%)")
         except Exception:
             profit_info.append(f"{code}의 데이터를 불러오는 데 문제가 발생했습니다.")
     
