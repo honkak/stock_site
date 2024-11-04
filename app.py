@@ -8,36 +8,6 @@ import datetime
 import pandas as pd
 import yfinance as yf
 import streamlit_analytics
-import streamlit.components.v1 as components
-
-# #방문객 수 및 추적(구글 아날리스틱으로 데이터 보내기)
-# st.markdown("""
-#     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5SSHBVL0TW"></script>
-#     <script>
-#     window.dataLayer = window.dataLayer || [];
-#     function gtag(){dataLayer.push(arguments);}
-#     window.onload = function() {
-#         gtag('js', new Date());
-#         gtag('config', 'G-5SSHBVL0TW');
-#     }
-#     </script>
-# """, unsafe_allow_html=True)
-
-# HTML with the meta tag for Google AdSense
-meta_html = """
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta name="google-adsense-account" content="ca-pub-9731947717883225">
-</head>
-<body>
-    <!-- Additional content if needed -->
-</body>
-</html>
-"""
-
-# Render the HTML in Streamlit
-components.html(meta_html, height=100)
 
 #서비스 제목 입력
 st.markdown("<h1 style='font-size: 26px;'>다빈치 주식차트 겹치기</h1>", unsafe_allow_html=True)
@@ -75,28 +45,28 @@ st.markdown("""
 
 col_code1, col_code2, col_code3 = st.columns(3)
 
-# 페이지 전체에서의 상호작용을 트래킹
-with streamlit_analytics.track():
-    with col_code1:
-        code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 입력하세요 - (예시)QQQ')
+# # 페이지 전체에서의 상호작용을 트래킹
+# with streamlit_analytics.track():
+#     with col_code1:
+#         code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 입력하세요 - (예시)QQQ')
 
-    with col_code2:
-        code2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력하세요 - (예시)005930')
+#     with col_code2:
+#         code2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력하세요 - (예시)005930')
 
-    with col_code3:
-        code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력하세요 - (예시)AAPL')
+#     with col_code3:
+#         code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력하세요 - (예시)AAPL')
 
-# with col_code1:
-#     code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 입력하세요 - (예시)QQQ')
+with col_code1:
+    code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 입력하세요 - (예시)QQQ')
 
-# with col_code2:
-#     code2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력하세요 - (예시)005930')
+with col_code2:
+    code2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력하세요 - (예시)005930')
 
-# with col_code3:
-#     code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력하세요 - (예시)AAPL')
+with col_code3:
+    code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력하세요 - (예시)AAPL')
 
-# # 세 입력 필드가 모두 입력된 후에 트래킹 코드가 작동
-# streamlit_analytics.track()
+# 세 입력 필드가 모두 입력된 후에 트래킹 코드가 작동
+streamlit_analytics.track()
 
 # 텍스트 입력 필드 추적
 if code1:
@@ -150,7 +120,7 @@ st.markdown("---")
 # 체크박스 그룹 (순서 변경)
 col1, col2, col3, col4 = st.columns(4)
 with col1:
-    show_us_etf = st.checkbox("미국ETF", value=True)  # 미국ETF
+    show_us_etf = st.checkbox("미국ETF", value=False)  # 미국ETF
 with col2:
     show_kr_etf = st.checkbox("한국ETF", value=False)  # 한국ETF
 with col3:
@@ -397,16 +367,6 @@ if codes and start_date and end_date:  # 'date'를 'start_date'와 'end_date'로
 
 # 조회 시작일 가상 투자금액의 수익률 및 수익금액 계산(진행중)
 
-#방문객 수 및 추적(구글 아날리스틱으로 데이터 보내기)
-# st.markdown("""
-#     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5SSHBVL0TW"></script>
-#     <script>
-#     window.dataLayer = window.dataLayer || [];
-#     function gtag(){dataLayer.push(arguments);}
-#     gtag('js', new Date());    
-#     gtag('config', 'G-5SSHBVL0TW');
-#     </script>
-# """, unsafe_allow_html=True)
 
 # URL에 항상 ?analytics=on을 추가하기 위한 설정
 if "analytics" not in st.experimental_get_query_params():
@@ -427,9 +387,3 @@ with streamlit_analytics.track(
     }
     </style>
 """, unsafe_allow_html=True)
-
-# 페이지 헤더에 메타 태그 삽입 (소유권 확인용)
-meta_tag = """
-<meta name="google-adsense-account" content="ca-pub-9731947717883225">
-"""
-components.html(meta_tag)
