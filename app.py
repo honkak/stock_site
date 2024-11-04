@@ -45,17 +45,6 @@ st.markdown("""
 
 col_code1, col_code2, col_code3 = st.columns(3)
 
-# # 페이지 전체에서의 상호작용을 트래킹
-# with streamlit_analytics.track():
-#     with col_code1:
-#         code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 입력하세요 - (예시)QQQ')
-
-#     with col_code2:
-#         code2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력하세요 - (예시)005930')
-
-#     with col_code3:
-#         code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력하세요 - (예시)AAPL')
-
 with col_code1:
     code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 입력하세요 - (예시)QQQ')
 
@@ -67,14 +56,6 @@ with col_code3:
 
 # 세 입력 필드가 모두 입력된 후에 트래킹 코드가 작동
 streamlit_analytics.track()
-
-# # 텍스트 입력 필드 추적
-# if code1:
-#     st.write(f"종목코드 1 입력됨: {code1}")
-# if code2:
-#     st.write(f"종목코드 2 입력됨: {code2}")
-# if code3:
-#     st.write(f"종목코드 3 입력됨: {code3}")
 
 # 종목 코드 리스트
 codes = [code1.strip(), code2.strip(), code3.strip()]
