@@ -360,7 +360,7 @@ with streamlit_analytics.track(unsafe_password="qqqq"):
     <style>
     /* Analytics Dashboard 크기 조정 */
     div[data-testid="stMarkdownContainer"] h2 {
-        font-size: 18px !important;
+        font-size: 16px !important;
         text-align: center;
     }
     </style>
