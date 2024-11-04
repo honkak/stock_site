@@ -348,6 +348,43 @@ if codes and start_date and end_date:  # 'date'를 'start_date'와 'end_date'로
 
 # 조회 시작일 가상 투자금액의 수익률 및 수익금액 계산(진행중)
 
+# 고정된 투자금액 (1000만원)
+initial_investment = 10000000  
+
+# 각 종목의 수익률 및 수익금액 계산
+if codes and start_date and end_date:
+    profit_info = []
+
+    for i, code in enumerate(codes):
+        try:
+            df = fdr.DataReader(code, start_date, end_date)
+            close_prices = df['Close']
+            start_price = close_prices.iloc[0]  # 시작 가격
+            end_price = close_prices.iloc[-1]    # 종료 가격
+            
+            # 수익률 계산
+            return_percentage = ((end_price - start_price) / start_price) * 100
+            # 수익금액 계산
+            profit_amount = (return_percentage / 100) * initial_investment
+            
+            # 출력할 메시지
+            profit_message = f"종목 {code} 현재는 {profit_amount:,.0f} 원이 되었습니다. (수익률: {return_percentage:.2f}%)"
+            profit_info.append(profit_message)
+        except Exception:
+            profit_info.append(f"{code}의 데이터를 불러오는 데 문제가 발생했습니다.")
+    
+    # 수익률 및 수익금액 결과 출력
+    # 3개 열에 맞게 출력합니다.
+    for idx, info in enumerate(profit_info):
+        if idx % 3 == 0:
+            col_name1.write(info)
+        elif idx % 3 == 1:
+            col_name2.write(info)
+        else:
+            col_name3.write(info)
+
+##################################################
+
 
 # URL에 항상 ?analytics=on을 추가하기 위한 설정
 if "analytics" not in st.experimental_get_query_params():
