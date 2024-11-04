@@ -358,13 +358,28 @@ with streamlit_analytics.track(
     unsafe_password="qqqq",
 ):
     
-    # Analytics Dashboard 글자 크기 조정
+#     # Analytics Dashboard 글자 크기 조정
+#     st.markdown("""
+#     <style>
+#     /* Analytics Dashboard 크기 조정 */
+#     div[data-testid="stMarkdownContainer"] h1 {
+#         font-size: 18px !important;
+#         text-align: center;
+#     }
+#     </style>
+# """, unsafe_allow_html=True)
+
+    # Analytics Dashboard 글자 크기 조정 및 설명 텍스트 숨기기
     st.markdown("""
-    <style>
-    /* Analytics Dashboard 크기 조정 */
-    div[data-testid="stMarkdownContainer"] h1 {
-        font-size: 18px !important;
-        text-align: center;
-    }
-    </style>
-""", unsafe_allow_html=True)
+        <style>
+        /* Analytics Dashboard 크기 조정 */
+        div[data-testid="stMarkdownContainer"] h1 {
+            font-size: 18px !important;
+            text-align: center;
+        }
+        /* 분석 대시보드의 특정 설명 텍스트 숨기기 */
+        div[data-testid="stMarkdownContainer"] div:nth-of-type(2) {
+            display: none; /* 분석 대시보드의 두 번째 div 숨기기 (구조에 따라 다를 수 있음) */
+        }
+        </style>
+    """, unsafe_allow_html=True)
