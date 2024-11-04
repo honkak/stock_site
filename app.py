@@ -120,7 +120,7 @@ data_matrix_us_etf = [
     ['SQQQ', 'QID', 'PSQ', '나스닥100', 'QQQ', 'QLD', 'TQQQ'],  # 3행
     ['SDOW', 'DXD', 'DOG', '다우존스', 'DIA', 'DDM', 'UDOW'],  # 4행
     ['TZA', 'TWM', 'RWM', '러셀2000', 'IWM', 'UWM', 'TNA'],  # 5행
-    ['', 'KORZ', '', '한국', 'EWY', 'KORU', ''],  # 6행
+    ['', '', '', '한국', 'EWY', 'KORU', ''],  # 6행
     ['YANG', 'FXP', 'CHAD', '중국', 'FXI', 'CHAU', 'YINN'],  # 7행
     ['', 'EWV', '', '일본', 'EWJ', 'EZJ', 'JPNL'],  # 8행
     ['', '', '', '베트남', 'VNM', '', ''],  # 9행
