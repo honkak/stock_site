@@ -363,10 +363,6 @@ with streamlit_analytics.track(unsafe_password="qqqq"):
         font-size: 18px !important;
         text-align: center;
     }
-    /* 설명 텍스트 숨기기 */
-    div[data-testid="stMarkdownContainer"] p:nth-of-type(3) {
-        display: none;
-    }
     </style>
     """, unsafe_allow_html=True)
 
