@@ -355,6 +355,9 @@ initial_investment = 10000000
 if codes and start_date and end_date:
     profit_info = []
 
+    # 각 열을 정의합니다.
+    col_name1, col_name2, col_name3 = st.columns(3)
+
     for i, code in enumerate(codes):
         try:
             df = fdr.DataReader(code, start_date, end_date)
