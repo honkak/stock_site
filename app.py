@@ -379,6 +379,9 @@ if "analytics" not in st.experimental_get_query_params():
     # </script>
     # """, unsafe_allow_html=True)
 
+if "analytics" in st.experimental_get_query_params():
+    st.experimental_set_query_params()  # 파라미터 모두 제거
+
 # 사용자 추적, 결과는 항상 표시되고, 비밀번호는 'qqqq'로 설정
 with streamlit_analytics.track(unsafe_password="qqqq"):
     
