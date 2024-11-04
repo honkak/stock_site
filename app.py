@@ -382,9 +382,9 @@ if codes and start_date and end_date:
                 color = 'red'  # 양수일 경우 붉은색
             else:
                 color = 'blue'   # 음수일 경우 파란색
-        
-            # profit_info.append(f"{stock_name} ({code})가 종료일 기준 {total_amount:,.0f} 원이 되었습니다. (수익률: {return_percentage:.2f}%)")
-            profit_info.append(f"{stock_name} ({code})가 종료일 기준 {total_amount:,.0f} 원이 되었습니다. (<span style='color: {color};'>수익률: {return_percentage:.2f}%</span>)")
+
+            # 투자결과 출력
+            profit_info.append(f"{stock_name} ({code})가 {total_amount:,.0f} 원이 되었습니다. (<span style='color: {color};'>수익률: {return_percentage:.2f}%</span>)")
             
         except Exception:
             profit_info.append(f"{code}의 데이터를 불러오는 데 문제가 발생했습니다.")
@@ -392,15 +392,6 @@ if codes and start_date and end_date:
     # 수익률 및 수익금액 결과 출력
     for info in profit_info:
         st.markdown(info, unsafe_allow_html=True)  # HTML을 안전하게 허용하여 출력
-
-    # # 3개 열에 맞게 출력합니다.
-    # for idx, info in enumerate(profit_info):
-    #     if idx % 3 == 0:
-    #         col_name1.write(info)
-    #     elif idx % 3 == 1:
-    #         col_name2.write(info)
-    #     else:
-    #         col_name3.write(info)
 
 
 ##################################################
