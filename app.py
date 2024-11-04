@@ -348,6 +348,9 @@ if codes and start_date and end_date:  # 'date'를 'start_date'와 'end_date'로
 
 # 조회 시작일 가상 투자금액의 수익률 및 수익금액 계산(진행중)
 
+# 수익금액 비교 입력
+st.markdown("<h2 style='font-size: 20px;'>1천만원을 투자했다면,</h2>", unsafe_allow_html=True)
+
 # 고정된 투자금액 (1000만원)
 initial_investment = 10000000  
 
@@ -364,15 +367,14 @@ if codes and start_date and end_date:
             close_prices = df['Close']
             start_price = close_prices.iloc[0]  # 시작 가격
             end_price = close_prices.iloc[-1]    # 종료 가격
-            
+
             # 수익률 계산
             return_percentage = ((end_price - start_price) / start_price) * 100
             # 수익금액 계산
             profit_amount = (return_percentage / 100) * initial_investment
+            total_amount = initial_investment + profit_amount
             
-            # 출력할 메시지
-            profit_message = f"종목 {code} 현재는 {profit_amount:,.0f} 원이 되었습니다. (수익률: {return_percentage:.2f}%)"
-            profit_info.append(profit_message)
+            profit_info.append(f"종목 {code} 현재 총 {total_amount:,.0f} 원입니다. (수익률: {return_percentage:.2f}%)")
         except Exception:
             profit_info.append(f"{code}의 데이터를 불러오는 데 문제가 발생했습니다.")
     
