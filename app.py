@@ -373,8 +373,10 @@ if codes and start_date and end_date:
             # 수익금액 계산
             profit_amount = (return_percentage / 100) * initial_investment
             total_amount = initial_investment + profit_amount
-            
-            profit_info.append(f"{codes} 가 종료일 기준 {total_amount:,.0f} 원이 되었습니다. (수익률: {return_percentage:.2f}%)")
+
+            # 종목 이름 가져오기
+            stock_name = stocks_info.get(code.strip(), '이름을 찾을 수 없습니다.')
+            profit_info.append(f"{stock_name} ({code})가 종료일 기준 {total_amount:,.0f} 원이 되었습니다. (수익률: {return_percentage:.2f}%)")
         except Exception:
             profit_info.append(f"{code}의 데이터를 불러오는 데 문제가 발생했습니다.")
     
