@@ -377,4 +377,4 @@ with streamlit_analytics.track(
         }
     });
     </script>
-""", unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
