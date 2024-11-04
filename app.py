@@ -393,14 +393,14 @@ if codes and start_date and end_date:
     for info in profit_info:
         st.markdown(info, unsafe_allow_html=True)  # HTML을 안전하게 허용하여 출력
 
-    # 3개 열에 맞게 출력합니다.
-    for idx, info in enumerate(profit_info):
-        if idx % 3 == 0:
-            col_name1.write(info)
-        elif idx % 3 == 1:
-            col_name2.write(info)
-        else:
-            col_name3.write(info)
+    # # 3개 열에 맞게 출력합니다.
+    # for idx, info in enumerate(profit_info):
+    #     if idx % 3 == 0:
+    #         col_name1.write(info)
+    #     elif idx % 3 == 1:
+    #         col_name2.write(info)
+    #     else:
+    #         col_name3.write(info)
 
 
 ##################################################
