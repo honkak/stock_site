@@ -384,7 +384,7 @@ if codes and start_date and end_date:
                 color = 'blue'   # 음수일 경우 파란색
 
             # 투자결과 출력
-            profit_info.append(f"{stock_name} ({code})가 {total_amount:,.0f} 원이 되었습니다. (<span style='color: {color};'>수익률: {return_percentage:.2f}%</span>)")
+            profit_info.append(f"{stock_name} ({code})가 투자결과 {total_amount:,.0f} 원이 되었습니다. (<span style='color: {color};'>수익률: {return_percentage:.2f}%</span>)")
             
         except Exception:
             profit_info.append(f"{code}의 데이터를 불러오는 데 문제가 발생했습니다.")
