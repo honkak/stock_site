@@ -1,5 +1,5 @@
 streamlit
-finance-datareader
+finance-datareader>=0.9.94
 pandas
 beautifulsoup4>=4.9.3
 plotly>=5.0.0
