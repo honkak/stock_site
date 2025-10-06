@@ -7,7 +7,6 @@ import FinanceDataReader as fdr
 import datetime
 import pandas as pd
 import yfinance as yf
-# import streamlit_analytics <- 제거됨
 
 #서비스 제목 입력
 st.markdown("<h2 style='font-size: 24px; text-align: center;'>다빈치 주식차트 겹치기 </h2>", unsafe_allow_html=True)
@@ -104,7 +103,7 @@ with col_name3:
     st.markdown(f"<span style='color: black;'>{code3}({stocks_info.get(code3.strip(), '')})</span>", unsafe_allow_html=True)
 
 # '기준시점 수익률 비교' 체크박스
-fixed_ratio = st.checkbox("기준시점 수익률 비교(Baseline return)")
+fixed_ratio = st.checkbox("기준시점 수익률 비교(Baseline return)", value=True) # 기본값 True로 변경
 
 # 수평선 추가
 st.markdown("---")
