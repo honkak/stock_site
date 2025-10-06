@@ -205,7 +205,7 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
             border: 1px solid black;  
             padding: 8px;  
             text-align: center;
-            color: #333333; /* 다크 모드에서도 대비가 확보되도록 텍스트 색상을 어두운 회색으로 고정 */
+            /* color: #333333; <-- 일반 셀의 텍스트 색상 고정 제거 */
         }
         .highlight {
             background-color: lightgray;
@@ -240,7 +240,7 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
             border: 1px solid black;  
             padding: 8px;  
             text-align: center;
-            color: #333333; /* 다크 모드에서도 대비가 확보되도록 텍스트 색상을 어두운 회색으로 고정 */
+            /* color: #333333; <-- 일반 셀의 텍스트 색상 고정 제거 */
         }
         .highlight {
             background-color: lightgray;
@@ -275,7 +275,7 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
             border: 1px solid black;  
             padding: 8px;  
             text-align: center;
-            color: #333333; /* 다크 모드에서도 대비가 확보되도록 텍스트 색상을 어두운 회색으로 고정 */
+            /* color: #333333; <-- 일반 셀의 텍스트 색상 고정 제거 */
         }
         .highlight {
             background-color: lightgray;
@@ -310,7 +310,7 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
             border: 1px solid black;  
             padding: 8px;  
             text-align: center;
-            color: #333333; /* 다크 모드에서도 대비가 확보되도록 텍스트 색상을 어두운 회색으로 고정 */
+            /* color: #333333; <-- 일반 셀의 텍스트 색상 고정 제거 */
         }
         .highlight {
             background-color: lightgray;
