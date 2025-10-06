@@ -205,9 +205,11 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
             border: 1px solid black;  
             padding: 8px;  
             text-align: center;
+            color: #333333; /* 다크 모드에서도 대비가 확보되도록 텍스트 색상을 어두운 회색으로 고정 */
         }
         .highlight {
             background-color: lightgray;
+            color: #333333; /* 다크 모드에서도 대비가 확보되도록 텍스트 색상을 어두운 회색으로 고정 */
         }
         </style>
         <table>
@@ -238,9 +240,11 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
             border: 1px solid black;  
             padding: 8px;  
             text-align: center;
+            color: #333333; /* 다크 모드에서도 대비가 확보되도록 텍스트 색상을 어두운 회색으로 고정 */
         }
         .highlight {
             background-color: lightgray;
+            color: #333333; /* 다크 모드에서도 대비가 확보되도록 텍스트 색상을 어두운 회색으로 고정 */
         }
         </style>
         <table>
@@ -271,9 +275,11 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
             border: 1px solid black;  
             padding: 8px;  
             text-align: center;
+            color: #333333; /* 다크 모드에서도 대비가 확보되도록 텍스트 색상을 어두운 회색으로 고정 */
         }
         .highlight {
             background-color: lightgray;
+            color: #333333; /* 다크 모드에서도 대비가 확보되도록 텍스트 색상을 어두운 회색으로 고정 */
         }
         </style>
         <table>
@@ -304,9 +310,11 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
             border: 1px solid black;  
             padding: 8px;  
             text-align: center;
+            color: #333333; /* 다크 모드에서도 대비가 확보되도록 텍스트 색상을 어두운 회색으로 고정 */
         }
         .highlight {
             background-color: lightgray;
+            color: #333333; /* 다크 모드에서도 대비가 확보되도록 텍스트 색상을 어두운 회색으로 고정 */
         }
         </style>
         <table>
@@ -412,3 +420,4 @@ if codes and start_date and end_date:
     # 수익률 및 수익금액 결과 출력
     for info in profit_info:
         st.markdown(info, unsafe_allow_html=True)  # HTML을 안전하게 허용하여 출력
+
