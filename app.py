@@ -18,7 +18,7 @@ col_start_date, col_end_date = st.columns(2)
 with col_start_date:
     start_date = st.date_input(
         "조회 시작일을 선택해 주세요",
-        datetime.datetime(2024, 1, 1)
+        datetime.datetime(2025, 1, 1)
     )
 
 with col_end_date:
