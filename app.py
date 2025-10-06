@@ -7,9 +7,10 @@ import FinanceDataReader as fdr
 import datetime
 import pandas as pd
 import yfinance as yf
+# import streamlit_analytics <- 제거됨
 
 #서비스 제목 입력
-st.markdown("<h2 style='font-size: 24px; text-align: center;'>다빈치 주식차트 겹치기 </h2>", unsafe_allow_html=True)
+st.markdown("<h2 style='font-size: 24px; text-align: center;'>다빈치 주식차트 겹치기 </h2>", unsafe_allow_html=True)
 
 # 날짜 입력 (조회 시작일과 종료일을 같은 행에 배치)
 col_start_date, col_end_date = st.columns(2)
@@ -45,7 +46,7 @@ st.markdown("""
 col_code1, col_code2, col_code3 = st.columns(3)
 
 with col_code1:
-    code1 = st.text_input('종목코드 1', value='', placeholder='종목코드를 입력하세요 - (예시)QQQ')
+    code1 = st.text_input('종목코드 1', value='QQQ', placeholder='종목코드를 입력하세요 - (예시)QQQ') # 기본값을 'QQQ'로 설정
 
 with col_code2:
     code2 = st.text_input('종목코드 2', value='', placeholder='종목코드를 입력하세요 - (예시)005930')
@@ -419,4 +420,3 @@ if codes and start_date and end_date:
     # 수익률 및 수익금액 결과 출력
     for info in profit_info:
         st.markdown(info, unsafe_allow_html=True)  # HTML을 안전하게 허용하여 출력
-
