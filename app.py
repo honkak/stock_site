@@ -1,5 +1,5 @@
 ########################################
-#주식 차트비교 서비스 개발_2024.10.19#
+#주식 차트비교 서비스 개발_2025.10.06#
 ########################################
 
 import streamlit as st
@@ -7,10 +7,10 @@ import FinanceDataReader as fdr
 import datetime
 import pandas as pd
 import yfinance as yf
-import streamlit_analytics
+# import streamlit_analytics <- 제거됨
 
 #서비스 제목 입력
-st.markdown("<h2 style='font-size: 24px; text-align: center;'>다빈치 주식차트 겹치기</h2>", unsafe_allow_html=True)
+st.markdown("<h2 style='font-size: 24px; text-align: center;'>다빈치 주식차트 겹치기 </h2>", unsafe_allow_html=True)
 
 # 날짜 입력 (조회 시작일과 종료일을 같은 행에 배치)
 col_start_date, col_end_date = st.columns(2)
@@ -54,14 +54,15 @@ with col_code2:
 with col_code3:
     code3 = st.text_input('종목코드 3', value='', placeholder='종목코드를 입력하세요 - (예시)AAPL')
 
-# 세 입력 필드가 모두 입력된 후에 트래킹 코드가 작동
-streamlit_analytics.track()
+# 세 입력 필드가 모두 입력된 후에 트래킹 코드가 작동 - 제거됨
+# streamlit_analytics.track()
 
 # 종목 코드 리스트
 codes = [code1.strip(), code2.strip(), code3.strip()]
 
 # 지수 코드 리스트 (필요에 따라 확장 가능)
-index_codes = ['KS11', 'DJI', 'JP225', 'KQ11', 'IXIC', 'STOXX50E', 'KS50', 'GSPC', 'CSI300', 'KS100', 'S&P500', 'VIX', 'KOSPI100', 'HSI', 'KRX100', 'FTSE', 'KS200', 'DAX', 'CAC', 'GSPC'] # 대표적인 지수들 예시
+# 대표적인 지수들 예시
+index_codes = ['KS11', 'DJI', 'JP225', 'KQ11', 'IXIC', 'STOXX50E', 'KS50', 'GSPC', 'CSI300', 'KS100', 'S&P500', 'VIX', 'KOSPI100', 'HSI', 'KRX100', 'FTSE', 'KS200', 'DAX', 'CAC', 'GSPC'] 
 
 # 종목 정보 가져오기
 stocks_info = {}
@@ -72,12 +73,22 @@ for code in codes:
             if code.isdigit():
                 stock = yf.Ticker(f"{code}.KS")
             elif code in index_codes:  # 지수 목록에 있는 경우에는 ^ 추가
+                # FinanceDataReader가 아닌 yfinance를 사용하는 경우, 지수 코드를 그대로 사용하거나 ^를 붙여야 할 수 있습니다.
+                # 여기서는 yfinance를 사용하므로 ^를 붙이는 것이 일반적이지만, fdr/yf의 작동 방식에 따라 다를 수 있습니다.
+                # yfinance의 지수 코드를 위해 ^를 붙이도록 수정합니다. (예: ^GSPC)
                 stock = yf.Ticker(f"^{code}")
             else:
                 stock = yf.Ticker(code)
 
-            stocks_info[code] = stock.info.get('shortName', '이름을 찾을 수 없습니다.')
+            # 종목 이름 가져오기
+            stock_name = stock.info.get('shortName', '이름을 찾을 수 없습니다.')
+            if stock_name == '이름을 찾을 수 없습니다.' and 'longName' in stock.info:
+                 stock_name = stock.info.get('longName')
+                 
+            stocks_info[code] = stock_name
+
         except Exception as e:
+            # st.error(f"Error fetching info for {code}: {e}") # 디버깅용
             stocks_info[code] = '이름을 찾을 수 없습니다.'
 
 # 종목 코드와 이름 좌우 배열로 표시
@@ -182,16 +193,17 @@ data_matrix_kr_etf = [
 if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
     # 미국ETF 표 출력
     if show_us_etf:
+        st.markdown("<h4 style='font-size: 16px; text-align: left; margin-top: 20px;'>미국 ETF 주요 코드</h4>", unsafe_allow_html=True)
         html = '''
         <style>
         table {
-            border-collapse: collapse; 
-            width: 100%; 
+            border-collapse: collapse;  
+            width: 100%;  
             font-size: 10px;  /* 글자 크기를 10px로 설정 */
         }
         td {
-            border: 1px solid black; 
-            padding: 8px; 
+            border: 1px solid black;  
+            padding: 8px;  
             text-align: center;
         }
         .highlight {
@@ -214,16 +226,17 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
 
     # 한국ETF 표 출력
     if show_kr_etf:
+        st.markdown("<h4 style='font-size: 16px; text-align: left; margin-top: 20px;'>한국 ETF 주요 코드</h4>", unsafe_allow_html=True)
         html_kr_etf = '''
         <style>
         table {
-            border-collapse: collapse; 
-            width: 100%; 
+            border-collapse: collapse;  
+            width: 100%;  
             font-size: 10px;  /* 글자 크기를 10px로 설정 */
         }
         td {
-            border: 1px solid black; 
-            padding: 8px; 
+            border: 1px solid black;  
+            padding: 8px;  
             text-align: center;
         }
         .highlight {
@@ -246,16 +259,17 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
     
     # 주요종목 표 출력
     if show_major_stocks:
+        st.markdown("<h4 style='font-size: 16px; text-align: left; margin-top: 20px;'>주요 시가총액 상위 종목 코드</h4>", unsafe_allow_html=True)
         html_major_stocks = '''
         <style>
         table {
-            border-collapse: collapse; 
-            width: 100%; 
+            border-collapse: collapse;  
+            width: 100%;  
             font-size: 10px;  /* 글자 크기를 10px로 설정 */
         }
         td {
-            border: 1px solid black; 
-            padding: 8px; 
+            border: 1px solid black;  
+            padding: 8px;  
             text-align: center;
         }
         .highlight {
@@ -278,16 +292,17 @@ if show_major_index or show_major_stocks or show_us_etf or show_kr_etf:
 
     # 지수 표 출력
     if show_major_index:
+        st.markdown("<h4 style='font-size: 16px; text-align: left; margin-top: 20px;'>주요 지수 코드</h4>", unsafe_allow_html=True)
         html_index = '''
         <style>
         table {
-            border-collapse: collapse; 
-            width: 100%; 
+            border-collapse: collapse;  
+            width: 100%;  
             font-size: 10px;  /* 글자 크기를 10px로 설정 */
         }
         td {
-            border: 1px solid black; 
-            padding: 8px; 
+            border: 1px solid black;  
+            padding: 8px;  
             text-align: center;
         }
         .highlight {
@@ -323,10 +338,10 @@ if codes and start_date and end_date:  # 'date'를 'start_date'와 'end_date'로
             else:
                 dataframes.append(close_prices.rename(code))
         except Exception:  # Exception을 처리하되, 오류 메시지를 표시하지 않음
-            st.warning(f"{code}의 데이터를 불러오는 데 문제가 발생했습니다. 확인해 주세요.")
+            st.warning(f"**{code}**의 데이터를 불러오는 데 문제가 발생했습니다. 종목 코드와 날짜를 확인해 주세요.")
 
     # 데이터프레임 리스트가 있을 경우
-    if dataframes:
+    if dataframes and not all(df.empty for df in dataframes):
         combined_data = pd.concat(dataframes, axis=1)
         tab1, tab2 = st.tabs(['차트', '데이터'])
     
@@ -336,7 +351,15 @@ if codes and start_date and end_date:  # 'date'를 'start_date'와 'end_date'로
                 st.write("Y축은 비율로 표시되며, 기준시점 0% 에서 시작합니다.")
     
         with tab2:
-            st.dataframe(pd.concat([fdr.DataReader(code, start_date, end_date) for code in codes], keys=codes))
+            try:
+                # 모든 종목의 전체 데이터를 병합합니다.
+                all_data = pd.concat(
+                    [fdr.DataReader(code, start_date, end_date).rename(columns=lambda x: f"{x} ({code})") for code in codes], 
+                    axis=1
+                )
+                st.dataframe(all_data)
+            except Exception:
+                 st.warning("데이터 탭에 모든 상세 데이터를 표시하는 데 문제가 발생했습니다.")
             
             # 컬럼 설명을 표 형식으로 표시
             column_description = {
@@ -349,7 +372,7 @@ if codes and start_date and end_date:  # 'date'를 'start_date'와 'end_date'로
 # 조회 시작일 가상 투자금액의 수익률 및 수익금액 계산(진행중)
 
 # 수익금액 비교 입력
-st.markdown("<h2 style='font-size: 20px;'>1천만원을 투자했다면,</h2>", unsafe_allow_html=True)
+st.markdown("<h2 style='font-size: 20px; margin-top: 30px;'>1천만원을 투자했다면,</h2>", unsafe_allow_html=True)
 
 # 고정된 투자금액 (1000만원)
 initial_investment = 10000000  
@@ -358,10 +381,7 @@ initial_investment = 10000000
 if codes and start_date and end_date:
     profit_info = []
 
-    # 각 열을 정의합니다.
-    col_name1, col_name2, col_name3 = st.columns(3)
-
-    for i, code in enumerate(codes):
+    for code in codes:
         try:
             df = fdr.DataReader(code, start_date, end_date)
             close_prices = df['Close']
@@ -384,33 +404,11 @@ if codes and start_date and end_date:
                 color = 'blue'   # 음수일 경우 파란색
 
             # 투자결과 출력
-            profit_info.append(f"{stock_name} ({code})가 투자결과 {total_amount:,.0f} 원이 되었습니다. (<span style='color: {color};'>수익률: {return_percentage:.2f}%</span>)")
+            profit_info.append(f"**{stock_name}** ({code})에 투자한 결과 **{total_amount:,.0f} 원**이 되었습니다. (<span style='color: {color};'>수익률: **{return_percentage:.2f}%**</span>)")
             
         except Exception:
-            profit_info.append(f"{code}의 데이터를 불러오는 데 문제가 발생했습니다.")
+            profit_info.append(f"**{code}**의 데이터를 불러오는 데 문제가 발생했습니다.")
 
     # 수익률 및 수익금액 결과 출력
     for info in profit_info:
         st.markdown(info, unsafe_allow_html=True)  # HTML을 안전하게 허용하여 출력
-
-
-##################################################
-
-
-# URL에 항상 ?analytics=on을 추가하기 위한 설정
-if "analytics" not in st.experimental_get_query_params():
-    st.experimental_set_query_params(analytics="on")
-
-# 사용자 추적, 결과는 항상 표시되고, 비밀번호는 'qqqq'로 설정
-with streamlit_analytics.track(unsafe_password="qqqq"):
-    # Analytics Dashboard 글자 크기 조정
-    st.markdown("""
-    <style>
-    /* Analytics Dashboard 크기 조정 */
-    div[data-testid="stMarkdownContainer"] h1 {
-        font-size: 20px !important;
-        text-align: center;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
